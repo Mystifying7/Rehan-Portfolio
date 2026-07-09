@@ -10,6 +10,7 @@ function Navbar() {
     "About",
     "Skills",
     "Projects",
+    "Hackathons",
     "Education",
     "Certifications",
   ];

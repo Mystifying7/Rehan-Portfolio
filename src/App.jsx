@@ -12,6 +12,7 @@ import BackToTop from "./components/BackToTop";
 import Stats from "./components/Stats";
 import { useEffect, useState } from "react";
 import LoadingScreen from "./components/LoadingScreen";
+import Hackathons from "./components/Hackathons";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -34,6 +35,7 @@ function App() {
       <About />
       <Skills />
       <Projects />
+      <Hackathons />
       <Education />
       <Experience />
       <Certifications />

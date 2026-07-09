@@ -2,7 +2,7 @@ import { Mail } from "lucide-react";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 
 function Footer() {
-  const links = ["Home", "About", "Skills", "Projects", "Education", "Certifications"];
+  const links = ["Home", "About", "Skills", "Projects", "Hackathons", "Education", "Certifications"];
 
   return (
     <footer className="px-6 py-10">
@@ -37,6 +37,7 @@ function Footer() {
 
           <div className="flex flex-col items-center justify-center gap-2 text-xs text-slate-500 md:flex-row">
             <p>© {new Date().getFullYear()} Rehan Alam. All Rights Reserved.</p>
+            Last Updated • {new Date().getFullYear()}
           </div>
         </div>
       </div>
