@@ -33,7 +33,7 @@ function Footer() {
             </div>
           </div>
 
-          <div className="my-5 h-px bg-white/10" />
+          <div className="my-5 h-px bg-white/10"/>
 
           <div className="flex flex-col items-center justify-center gap-2 text-xs text-slate-500 md:flex-row">
             <p>© {new Date().getFullYear()} Rehan Alam. All Rights Reserved.</p>
