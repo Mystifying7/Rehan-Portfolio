@@ -13,6 +13,7 @@ import Stats from "./components/Stats";
 import { useEffect, useState } from "react";
 import LoadingScreen from "./components/LoadingScreen";
 import Hackathons from "./components/Hackathons";
+import CursorGlow from "./components/CursorGlow";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -42,6 +43,7 @@ function App() {
       <Contact />
       <Footer />
       <BackToTop />
+      <CursorGlow />
     </main>
   );
 }

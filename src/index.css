@@ -10,3 +10,12 @@ body {
   color: white;
   font-family: "Inter", sans-serif;
 }
+
+/* Custom Trident Cursor — Desktop Only */
+@media (min-width: 768px) {
+  *,
+  *::before,
+  *::after {
+    cursor: none !important;
+  }
+}
