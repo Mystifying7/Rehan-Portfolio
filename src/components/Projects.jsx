@@ -1,20 +1,21 @@
 import { ExternalLink, Code2 } from "lucide-react";
 import SectionReveal from "./SectionReveal";
 
-import chatbot from "../assets/projects/chatbot.png";
+import Kavacham from "../assets/Hackathons/Kavacham.png";
 import faceRecognition from "../assets/projects/face-recognition.png";
 import housePrice from "../assets/projects/house-price.png";
+import { FaYoutube } from "react-icons/fa6";
 
 const projects = [
   {
-    title: "AI Chatbot",
-    category: "Artificial Intelligence",
-    image: chatbot,
+    title: "Kavacham",
+    category: "Cyber Security",
+    image: Kavacham,
     description:
-      "Conversational assistant built using NLP and Machine Learning.",
+      "Detect outbound personal-data exposure, inspect third-party APK risk, preserve encrypted evidence, prepare erasure requests, and organise a reviewable escalation timeline.",
     stack: ["Python", "NLP", "ML"],
-    github: "#",
-    live: "#",
+    github: "https://github.com/hackerskr76/Kavacham-Citadel1.0",
+    Youtube : "https://youtu.be/BeWeT9qgZ6U?si=_m7GKTOtG2QgaveM",
   },
   {
     title: "Face Recognition",
@@ -22,9 +23,16 @@ const projects = [
     image: faceRecognition,
     description:
       "Real-time face detection and recognition using OpenCV.",
-    stack: ["Python", "OpenCV", "AI"],
-    github: "#",
-    live: "#",
+    stack: ["React"
+,"TypeScript"
+,"Vite"
+,"React Router "
+,"Tailwind CSS "
+,"Zod "
+,"Lucide React"
+,"Web Crypto API"
+,"IndexedDB"],
+    
   },
   {
     title: "House Price Prediction",
@@ -87,7 +95,7 @@ hover:shadow-cyan-400/10
                 className="group overflow-hidden rounded-xl border border-white/10 bg-gradient-to-b from-slate-900 to-slate-950 shadow-lg shadow-cyan-500/5 transition-all duration-300 hover:-translate-y-1 hover:border-cyan-400/30 hover:shadow-cyan-400/10"
               >
                 {/* Image */}
-                <div className="h-24 overflow-hidden">
+                <div className="h-65 overflow-hidden">
                   <img
                     src={project.image}
                     alt={project.title}
@@ -132,14 +140,13 @@ hover:shadow-cyan-400/10
                       Code
                     </a>
 
-                    <a
-                      href={project.live}
+                    <a 
+                      href={project.Youtube}
                       target="_blank"
                       rel="noreferrer"
-                      className="flex flex-1 items-center justify-center gap-1 rounded-lg bg-cyan-400 py-1.5 text-[10px] font-bold text-slate-950 transition hover:bg-cyan-300"
+                      className="flex flex-1 items-center justify-center gap-1 rounded-lg bg-cyan-400 py-1.5 text-[10px]  font-bold text-slate-950 transition hover:bg-cyan-300"
                     >
-                      <ExternalLink size={12} />
-                      Live
+                      <FaYoutube size={12}/>
                     </a>
                   </div>
 

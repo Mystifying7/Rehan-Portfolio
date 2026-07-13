@@ -19,20 +19,28 @@ const levelStyles = {
 
 const hackathons = [
   {
-    name: "Hackathon Name",
-    level: "International",
+    name: "Ciadetal",
+    level: "National",
     status: "Participant",
-    project: "AI-Based Solution",
+    project: "Kavacham",
     summary:
-      "Built a practical AI-based solution under time constraints with teamwork and rapid execution.",
-    date: "Month 2026",
+      "Detect outbound personal-data exposure, inspect third-party APK risk, preserve encrypted evidence, prepare erasure requests, and organise a reviewable escalation timeline.",
+    date: "july 2026",
     team: "Team of 4",
-    duration: "36 Hours",
+    duration: "30 Hours",
     result: "Prototype",
-    stack: ["Python", "React", "AI", "ML"],
-    github: "https://github.com/hackerskr76/PreMortem-The-Failure-Engine.git",
+    stack: ["React"
+,"TypeScript"
+,"Vite"
+,"React Router "
+,"Tailwind CSS "
+,"Zod "
+,"Lucide React"
+,"Web Crypto API"
+,"IndexedDB"],
+    github: "https://github.com/hackerskr76/Kavacham-Citadel1.0",
     live: "#",
-    certificate: "#",
+    certificate: "https://drive.google.com/file/d/1PZf5RfAhI-AmBtAl9Dinb6_CVhYdglIC/view?usp=drive_link",
   },
 ];
 
