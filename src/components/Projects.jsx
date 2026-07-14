@@ -1,28 +1,19 @@
 import { ExternalLink, Code2 } from "lucide-react";
 import SectionReveal from "./SectionReveal";
 
-import Kavacham from "../assets/Hackathons/Kavacham.png";
+import Kavacham from "../assets/projects/Kavacham.mp4";
 import faceRecognition from "../assets/projects/face-recognition.png";
 import housePrice from "../assets/projects/house-price.png";
 import { FaYoutube } from "react-icons/fa6";
+import { video } from "framer-motion/client";
 
 const projects = [
   {
     title: "Kavacham",
     category: "Cyber Security",
-    image: Kavacham,
+    video: Kavacham,
     description:
       "Detect outbound personal-data exposure, inspect third-party APK risk, preserve encrypted evidence, prepare erasure requests, and organise a reviewable escalation timeline.",
-    stack: ["Python", "NLP", "ML"],
-    github: "https://github.com/hackerskr76/Kavacham-Citadel1.0",
-    Youtube : "https://youtu.be/BeWeT9qgZ6U?si=_m7GKTOtG2QgaveM",
-  },
-  {
-    title: "Face Recognition",
-    category: "Computer Vision",
-    image: faceRecognition,
-    description:
-      "Real-time face detection and recognition using OpenCV.",
     stack: ["React"
 ,"TypeScript"
 ,"Vite"
@@ -32,6 +23,16 @@ const projects = [
 ,"Lucide React"
 ,"Web Crypto API"
 ,"IndexedDB"],
+    github: "https://github.com/hackerskr76/Kavacham-Citadel1.0",
+    Youtube : "https://youtu.be/BeWeT9qgZ6U?si=_m7GKTOtG2QgaveM",
+  },
+  {
+    title: "Face Recognition",
+    category: "Computer Vision",
+    image: faceRecognition,
+    description:
+      "Real-time face detection and recognition using OpenCV.",
+    stack: ["Python", "NLP", "ML"],
     
   },
   {
@@ -96,10 +97,14 @@ hover:shadow-cyan-400/10
               >
                 {/* Image */}
                 <div className="h-65 overflow-hidden">
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+                  <video
+                    src={project.video}
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    preload="metadata"
+                    className="h-56 w-full rounded-xl object-cover transition duration-500 group-hover:scale-105"
                   />
                 </div>
 
