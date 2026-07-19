@@ -2,10 +2,10 @@ import { ExternalLink, Code2 } from "lucide-react";
 import SectionReveal from "./SectionReveal";
 
 import Kavacham from "../assets/projects/Kavacham.mp4";
-import faceRecognition from "../assets/projects/face-recognition.png";
-import housePrice from "../assets/projects/house-price.png";
+import PropEng from "../assets/projects/PROP_ENGINE.mp4";
 import { FaYoutube } from "react-icons/fa6";
 import { video } from "framer-motion/client";
+import { Code2Icon } from "lucide-react";
 
 const projects = [
   {
@@ -27,23 +27,14 @@ const projects = [
     Youtube : "https://youtu.be/BeWeT9qgZ6U?si=_m7GKTOtG2QgaveM",
   },
   {
-    title: "Face Recognition",
+    title: "PROP_ENGINE.ai",
     category: "Computer Vision",
-    image: faceRecognition,
+    video: PropEng,
     description:
-      "Real-time face detection and recognition using OpenCV.",
-    stack: ["Python", "NLP", "ML"],
-    
-  },
-  {
-    title: "House Price Prediction",
-    category: "Machine Learning",
-    image: housePrice,
-    description:
-      "Regression model for predicting house prices using ML.",
-    stack: ["Python", "Pandas", "Sklearn"],
-    github: "#",
-    live: "#",
+      "A full-stack predictive web application built with React and Flask that leverages Scikit-Learn machine learning models to provide accurate, real-time real estate valuations across multiple Indian cities based on historical data vectors.",
+    stack: ["React.js", "Tailwind CSS", "Python", "Flask", "Scikit-Learn", "Pandas", "Vercel", "Render"],
+    github: "https://github.com/Mystifying7/House_Price_Project",
+    live: "https://house-price-project-ten.vercel.app/"
   },
 ];
 
@@ -135,28 +126,51 @@ hover:shadow-cyan-400/10
                   </div>
 
                   <div className="mt-3 flex gap-2">
-                    <a
-                      href={project.github}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="flex flex-1 items-center justify-center gap-1 rounded-lg border border-white/10 py-1.5 text-[10px] font-semibold text-slate-300 transition hover:border-cyan-400/40 hover:text-cyan-300"
-                    >
-                      <Code2 size={12} />
-                      Code
-                    </a>
 
-                    <a 
-                      href={project.Youtube}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="flex flex-1 items-center justify-center gap-1 rounded-lg bg-cyan-400 py-1.5 text-[10px]  font-bold text-slate-950 transition hover:bg-cyan-300"
-                    >
-                      <FaYoutube size={12}/>
-                    </a>
+  {/* GitHub */}
+  {project.github && (
+    <a
+      href={project.github}
+      target="_blank"
+      rel="noreferrer"
+      className="flex flex-1 items-center justify-center gap-1 rounded-lg border border-white/10 py-1.5 text-[10px] font-semibold text-slate-300 transition hover:border-cyan-400/40 hover:text-cyan-300"
+    >
+      <Code2 size={12} />
+      Code
+    </a>
+  )}
+
+  {/* YouTube Demo */}
+  {project.Youtube && (
+    <a
+      href={project.Youtube}
+      target="_blank"
+      rel="noreferrer"
+      className="flex flex-1 items-center justify-center gap-1 rounded-lg bg-red-600 py-1.5 text-[10px] font-bold text-white transition hover:bg-red-500"
+    >
+      <FaYoutube size={12} />
+      Demo
+    </a>
+  )}
+
+  {/* Live Demo */}
+  {project.live && (
+    <a
+      href={project.live}
+      target="_blank"
+      rel="noreferrer"
+      className="flex flex-1 items-center justify-center gap-1 rounded-lg bg-cyan-400 py-1.5 text-[10px] font-bold text-slate-950 transition hover:bg-cyan-300"
+    >
+      <ExternalLink size={12} />
+      Live
+    </a>
+  )}
+
+</div>
                   </div>
 
                 </div>
-              </div>
+    
             ))}
           </div>
 

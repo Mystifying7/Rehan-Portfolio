@@ -19,7 +19,7 @@ const levelStyles = {
 
 const hackathons = [
   {
-    name: "Ciadetal",
+    name: "Citadel 1.O",
     level: "National",
     status: "Participant",
     project: "Kavacham",
