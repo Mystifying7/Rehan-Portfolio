@@ -3,6 +3,8 @@ import SectionReveal from "./SectionReveal";
 
 import Kavacham from "../assets/projects/Kavacham.mp4";
 import PropEng from "../assets/projects/PROP_ENGINE.mp4";
+import Virtual from "../assets/projects/Virtual_Steering.mp4";
+import AirCursor from "../assets/projects/Air-Cursor.mp4";
 import { FaYoutube } from "react-icons/fa6";
 import { video } from "framer-motion/client";
 import { Code2Icon } from "lucide-react";
@@ -28,13 +30,31 @@ const projects = [
   },
   {
     title: "PROP_ENGINE.ai",
-    category: "Computer Vision",
+    category: "Full-Stack, Machine Learning, PropTech",
     video: PropEng,
     description:
       "A full-stack predictive web application built with React and Flask that leverages Scikit-Learn machine learning models to provide accurate, real-time real estate valuations across multiple Indian cities based on historical data vectors.",
     stack: ["React.js", "Tailwind CSS", "Python", "Flask", "Scikit-Learn", "Pandas", "Vercel", "Render"],
     github: "https://github.com/Mystifying7/House_Price_Project",
     live: "https://house-price-project-ten.vercel.app/"
+  },
+  {
+    title: "Virtual-Steering-Wheel-Master",
+    category: "Computer Vision, Human-Computer Interaction (HCI), and Gaming Utilities",
+    video: Virtual,
+    description:
+      "A computer vision-based Python application built with OpenCV that leverages real-time hand-tracking algorithms to provide accurate, low-latency virtual steering controls based on live webcam video feeds.",
+    stack: ["Python", "OpenCV", "MediaPipe", "NumPy", "pynput"],
+    github: "https://github.com/Mystifying7/virtual-steering-wheel-master"
+  },
+  {
+    title: "Air-Cursor",
+    category: "Computer Vision, Full-Stack, Human-Computer Interaction",
+    video: AirCursor,
+    description:
+      "A real-time, gesture-controlled interactive web portfolio built with Python and Vanilla JavaScript that leverages MediaPipe and WebSockets to enable entirely hands-free spatial navigation and seamless frontend interactions without a physical mouse.",
+    stack: ["Python", "OpenCV", "MediaPipe", "WebSockets", "JavaScript", "HTML5", "CSS3"],
+    github: "https://github.com/Mystifying7/AirCursor"
   },
 ];
 
@@ -86,16 +106,15 @@ hover:shadow-cyan-400/10
                 key={project.title}
                 className="group overflow-hidden rounded-xl border border-white/10 bg-gradient-to-b from-slate-900 to-slate-950 shadow-lg shadow-cyan-500/5 transition-all duration-300 hover:-translate-y-1 hover:border-cyan-400/30 hover:shadow-cyan-400/10"
               >
-                {/* Image */}
-                <div className="h-65 overflow-hidden">
+                {/* Video */}
+                <div className="aspect-video overflow-hidden">
                   <video
                     src={project.video}
                     autoPlay
                     muted
                     loop
                     playsInline
-                    preload="metadata"
-                    className="h-56 w-full rounded-xl object-cover transition duration-500 group-hover:scale-105"
+                    className="h-full w-full object-cover"
                   />
                 </div>
 
