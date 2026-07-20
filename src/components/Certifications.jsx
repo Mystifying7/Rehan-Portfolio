@@ -8,7 +8,7 @@ const certifications = [
     duration: "Jan 2024 • Apr 2024",
     level: "",
     achievement: "",
-    view: "/certificates/c-certificate.pdf",
+    view: "/certificates/C programming.pdf",
   },
   {
     title: "Data Structures & Algorithms",
@@ -16,7 +16,7 @@ const certifications = [
     duration: "Jul 2025 • Oct 2025",
     level: "SILVER",
     achievement: "Top 5% Rank",
-    view: "/certificates/dsa-certificate.pdf",
+    view: "/certificates/DSA.pdf",
   },
   {
     title: "Java Programming",
@@ -24,7 +24,7 @@ const certifications = [
     duration: "Jan 2026 • Apr 2026",
     level: "GOLD",
     achievement: "100% Score",
-    view: "/certificates/java-certificate.pdf",
+    view: "/certificates/Java.pdf",
   },
 ];
 

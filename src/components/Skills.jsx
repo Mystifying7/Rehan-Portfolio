@@ -7,7 +7,14 @@ import {
   FaReact,
   FaGitAlt,
   FaLinux,
+  FaLanguage,
+  FaCamera,
+  
+  FaHtml5,
+  FaBeer,
 } from "react-icons/fa";
+
+import { FaC,FaCss, FaFlask } from "react-icons/fa6";
 
 import {
   SiTensorflow,
@@ -16,27 +23,31 @@ import {
   SiTailwindcss,
   SiMysql,
 } from "react-icons/si";
-
 const skillGroups = [
   {
     title: "Programming & AI",
     skills: [
-      { name: "Python", level: 90, icon: <FaPython /> },
-      { name: "Java", level: 80, icon: <FaJava /> },
-      { name: "JavaScript", level: 75, icon: <SiJavascript /> },
-      { name: "Machine Learning", level: 85, icon: <SiTensorflow /> },
-      { name: "TensorFlow", level: 75, icon: <SiTensorflow /> },
-      { name: "OpenCV", level: 70, icon: <SiOpencv /> },
+      { name: "Python", level: 80, icon: <FaPython /> },
+      { name: "Java", level: 70, icon: <FaJava /> },
+      { name: "C", level : 70, icon: <FaC /> },
+      // { name: "JavaScript", level: 75, icon: <SiJavascript /> },
+      { name: "Machine Learning (Basics)", level: 40, icon: <SiTensorflow /> },
+      { name: "Computer Vision (Scikit-Learn)", level:65, icon:< FaCamera />}
+      // { name: "TensorFlow", level: 75, icon: <SiTensorflow /> },
+      // { name: "OpenCV", level: 70, icon: <SiOpencv /> },
     ],
   },
   {
     title: "Web Development & Tools",
     skills: [
-      { name: "React", level: 85, icon: <FaReact /> },
-      { name: "Tailwind CSS", level: 90, icon: <SiTailwindcss /> },
-      { name: "MySQL", level: 75, icon: <SiMysql /> },
-      { name: "Git", level: 80, icon: <FaGitAlt /> },
-      { name: "Linux", level: 75, icon: <FaLinux /> },
+      { name: "React", level: 45, icon: <FaReact /> },
+      { name: "Tailwind CSS", level: 30, icon: <SiTailwindcss /> },
+      // { name: "MySQL", level: 75, icon: <SiMysql /> },
+      { name: "Git & Github", level: 80, icon: <FaGitAlt /> },
+      { name: "HTML", level: 75, icon: <FaHtml5 /> },
+      { name: "CSS", level: 75, icon: <FaCss /> },
+      { name: "Flask", level: 60, icon: <FaFlask /> },
+      // { name: "Linux", level: 75, icon: <FaLinux /> },
     ],
   },
 ];

@@ -5,21 +5,21 @@ const education = [
   {
     year: "2024 - Present",
     degree: "B.Tech in Computer Science Engineering",
-    institute: "Your College Name",
+    institute: "Swami Vivekananda University",
     focus:
       "Focused on Artificial Intelligence, Machine Learning, Data Structures, Operating Systems, and Software Engineering.",
   },
   {
-    year: "2022 - 2024",
+    year: "2023 - 2024",
     degree: "Senior Secondary Education",
-    institute: "Your School Name",
+    institute: "Kendriya Vidyalaya Godda",
     focus:
       "Built a strong foundation in mathematics, analytical thinking, and problem-solving.",
   },
   {
-    year: "2020 - 2022",
+    year: "2021 - 2022",
     degree: "Secondary Education",
-    institute: "Your School Name",
+    institute: "Kendriya Vidyalaya Singarsi",
     focus:
       "Developed core academic discipline, logical reasoning, and learning consistency.",
   },

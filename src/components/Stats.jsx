@@ -8,12 +8,12 @@ const stats = [
     icon: <Code2 size={32} />,
   },
   {
-    number: "5+",
+    number: "3",
     label: "Certificates",
     icon: <Award size={32} />,
   },
   {
-    number: "20+",
+    number: "4",
     label: "DSA Problems",
     icon: <Brain size={32} />,
   },

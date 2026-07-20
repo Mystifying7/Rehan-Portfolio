@@ -25,9 +25,9 @@ const journey = [
   },
   {
     year: "Goal",
-    title: "AI Engineer",
+    title: "AI and ML Engineer",
     description:
-      "Aiming to build intelligent systems that solve real-world problems using AI and software engineering.",
+      "Aiming to build intelligent systems that solve real-world problems using AI ML and software engineering.",
     icon: <Target size={15} />,
   },
 ];

@@ -15,7 +15,7 @@ const points = [
   {
     icon: <Target size={20} />,
     title: "Goal",
-    desc: "To become an AI engineer who builds useful real-world intelligent systems.",
+    desc: "To become an AI and ML nengineer who builds useful real-world intelligent systems.",
   },
 ];
 
