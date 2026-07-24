@@ -5,6 +5,7 @@ import Kavacham from "../assets/projects/Kavacham.mp4";
 import PropEng from "../assets/projects/PROP_ENGINE.mp4";
 import Virtual from "../assets/projects/Virtual_Steering.mp4";
 import AirCursor from "../assets/projects/Air-Cursor.mp4";
+import CineMindAI from "../assets/projects/CineMindAI.mp4";
 import { FaYoutube } from "react-icons/fa6";
 import { video } from "framer-motion/client";
 import { Code2Icon } from "lucide-react";
@@ -55,6 +56,15 @@ const projects = [
       "A real-time, gesture-controlled interactive web portfolio built with Python and Vanilla JavaScript that leverages MediaPipe and WebSockets to enable entirely hands-free spatial navigation and seamless frontend interactions without a physical mouse.",
     stack: ["Python", "OpenCV", "MediaPipe", "WebSockets", "JavaScript", "HTML5", "CSS3"],
     github: "https://github.com/Mystifying7/AirCursor"
+  },
+  {
+    title: "CineMind AI",
+    category: "AI / Full Stack",
+    video: CineMindAI,
+    description:
+      "An AI-powered content-based movie recommender built with FastAPI and Vanilla JS. Uses NLP (CountVectorizer & PorterStemmer) and Cosine Similarity to compute real-time vector distances across 4,800+ films, paired with a Glassmorphism UI and LocalStorage watchlist.",
+    stack: ["Python", "FastAPI", "Scikit-Learn", "NLP", "JavaScript", "HTML/CSS"],
+    github: "https://github.com/Mystifying7/Movie-Recommendation-System"
   },
 ];
 
