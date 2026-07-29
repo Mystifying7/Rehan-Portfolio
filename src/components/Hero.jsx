@@ -118,11 +118,11 @@ function Hero() {
           </a>
 
           <a
-            href="/certificates/Rehan Resume.pdf"
+            href="https://drive.google.com/file/d/1OU3D8z2AB95H2S-mMWdrHhmAw4Hu6eIZ/view?usp=drive_link"
             download
             className="inline-flex items-center justify-center gap-2 rounded-xl border border-cyan-400/40 px-7 py-3 font-bold text-cyan-300 transition-all duration-300 hover:-translate-y-1 hover:bg-cyan-400/10"
           >
-            Download Resume
+            Download/View Resume
             <Download size={17} />
           </a>
         </div>
