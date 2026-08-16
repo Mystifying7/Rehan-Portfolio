@@ -1,159 +1,111 @@
 import { motion } from "framer-motion";
 import SectionReveal from "./SectionReveal";
+import { Brain, Code2, Layers, Cpu, Server, Wrench } from "lucide-react";
 
-import {
-  FaPython,
-  FaJava,
-  FaReact,
-  FaGitAlt,
-  FaLinux,
-  FaLanguage,
-  FaCamera,
-  
-  FaHtml5,
-  FaBeer,
-} from "react-icons/fa";
-
-import { FaC,FaCss, FaFlask } from "react-icons/fa6";
-
-import {
-  SiTensorflow,
-  SiOpencv,
-  SiJavascript,
-  SiTailwindcss,
-  SiMysql,
-} from "react-icons/si";
-const skillGroups = [
+const skillCategories = [
   {
-    title: "Programming & AI",
-    skills: [
-      { name: "Python", level: 80, icon: <FaPython /> },
-      { name: "Java", level: 70, icon: <FaJava /> },
-      { name: "C", level : 70, icon: <FaC /> },
-      // { name: "JavaScript", level: 75, icon: <SiJavascript /> },
-      { name: "Machine Learning (Basics)", level: 40, icon: <SiTensorflow /> },
-      { name: "Computer Vision (Scikit-Learn)", level:65, icon:< FaCamera />}
-      // { name: "TensorFlow", level: 75, icon: <SiTensorflow /> },
-      // { name: "OpenCV", level: 70, icon: <SiOpencv /> },
-    ],
+    title: "AI & Machine Learning",
+    icon: <Brain size={18} />,
+    skills: ["Scikit-Learn", "Computer Vision (OpenCV, MediaPipe)", "NLP Basics", "Predictive Analytics"],
   },
   {
-    title: "Web Development & Tools",
-    skills: [
-      { name: "React", level: 45, icon: <FaReact /> },
-      { name: "Tailwind CSS", level: 30, icon: <SiTailwindcss /> },
-      // { name: "MySQL", level: 75, icon: <SiMysql /> },
-      { name: "Git & Github", level: 80, icon: <FaGitAlt /> },
-      { name: "HTML", level: 75, icon: <FaHtml5 /> },
-      { name: "CSS", level: 75, icon: <FaCss /> },
-      { name: "Flask", level: 60, icon: <FaFlask /> },
-      // { name: "Linux", level: 75, icon: <FaLinux /> },
-    ],
+    title: "Programming Languages",
+    icon: <Code2 size={18} />,
+    skills: ["Python", "Java", "C", "JavaScript", "HTML5 & CSS3"],
+  },
+  {
+    title: "Full-Stack Web Development",
+    icon: <Server size={18} />,
+    skills: ["React.js", "Flask", "FastAPI", "Tailwind CSS", "REST APIs"],
+  },
+  {
+    title: "Core CS & Tools",
+    icon: <Wrench size={18} />,
+    skills: ["Data Structures & Algorithms", "Operating Systems", "DBMS & SQL", "Git & GitHub", "Linux"],
   },
 ];
 
-function Skills() {
-  return (
-    <section id="skills" className="px-6 py-12">
-      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan-400/60 to-transparent opacity-0 transition duration-300 group-hover:opacity-100" />
-      <div className="
-group
-relative
-overflow-hidden
-rounded-2xl
-border
-border-white/10
-bg-white/[0.03]
-backdrop-blur-xl
-p-4
-shadow-lg
-shadow-cyan-500/5
-transition-all
-duration-300
-hover:-translate-y-1
-hover:border-cyan-400/30
-hover:bg-cyan-400/[0.04]
-hover:shadow-cyan-400/10
-">
-      <SectionReveal>
-        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan-400/60 to-transparent opacity-0 transition duration-300 group-hover:opacity-100" />
+function Skills({ theme = "dark" }) {
+  const isDark = theme === "dark";
 
-          {/* Heading */}
+  return (
+    <section id="skills" className="px-6 py-10">
+      <SectionReveal>
+        <div
+          className={`mx-auto max-w-5xl rounded-3xl border p-6 shadow-2xl backdrop-blur-xl transition duration-300 ${
+            isDark
+              ? "border-white/10 bg-slate-900/50 hover:border-cyan-400/40"
+              : "border-slate-200 bg-white/80 hover:border-cyan-500/40 shadow-slate-300/40"
+          }`}
+        >
+          {/* Section Header */}
           <div className="mb-8 text-center">
-            <p className="text-xs font-semibold uppercase tracking-[0.35em] text-cyan-400">
+            <p
+              className={`text-xs font-bold uppercase tracking-[0.35em] ${
+                isDark ? "text-cyan-400" : "text-cyan-600"
+              }`}
+            >
               Skills
             </p>
-
-            <h2 className="mt-2 text-3xl font-bold">
+            <h2
+              className={`mt-2 text-3xl font-extrabold ${
+                isDark ? "text-white" : "text-slate-900"
+              }`}
+            >
               Technical Expertise
             </h2>
-
-            <p className="mx-auto mt-3 max-w-lg text-sm text-slate-400">
-              Technologies and tools I use for Artificial Intelligence,
-              Machine Learning and Modern Software Development.
+            <p
+              className={`mx-auto mt-2 max-w-lg text-sm ${
+                isDark ? "text-slate-400" : "text-slate-600"
+              }`}
+            >
+              Core domains, languages, frameworks, and engineering tools.
             </p>
           </div>
 
-          {/* Cards */}
-          <div className="grid gap-5 lg:grid-cols-2">
-
-            {skillGroups.map((group) => (
+          {/* 2-Column Skill Grid */}
+          <div className="grid gap-4 md:grid-cols-2">
+            {skillCategories.map((category) => (
               <div
-                key={group.title}
-                className="rounded-2xl border border-white/10 bg-gradient-to-b from-slate-900 to-slate-950 p-4 shadow-lg shadow-cyan-500/5 transition-all duration-300 hover:-translate-y-1 hover:border-cyan-400/30 hover:shadow-cyan-400/10"
+                key={category.title}
+                className={`rounded-2xl border p-4 backdrop-blur-xl transition duration-300 ${
+                  isDark
+                    ? "border-white/10 bg-slate-950/60 hover:border-cyan-400/30"
+                    : "border-slate-200 bg-slate-50 hover:border-cyan-500/30"
+                }`}
               >
-                <h3 className="mb-4 text-lg font-semibold text-cyan-400">
-                  {group.title}
-                </h3>
-
-                <div className="space-y-3">
-
-                  {group.skills.map((skill) => (
-                    <div key={skill.name}>
-
-                      <div className="mb-1 flex items-center justify-between">
-
-                        <div className="flex items-center gap-2">
-
-                          <span className="text-lg text-cyan-400">
-                            {skill.icon}
-                          </span>
-
-                          <span className="text-[13px] font-medium text-slate-300">
-                            {skill.name}
-                          </span>
-
-                        </div>
-
-                        <span className="text-xs font-medium text-cyan-400">
-                          {skill.level}%
-                        </span>
-
-                      </div>
-
-                      <div className="h-1 overflow-hidden rounded-full bg-slate-800">
-
-                        <motion.div
-                          initial={{ width: 0 }}
-                          whileInView={{ width: `${skill.level}%` }}
-                          viewport={{ once: true }}
-                          transition={{ duration: 1 }}
-                          className="h-full rounded-full bg-gradient-to-r from-cyan-400 to-blue-500"
-                        />
-
-                      </div>
-
-                    </div>
-                  ))}
-
+                <div className="flex items-center gap-2.5 mb-3">
+                  <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-cyan-400/10 text-cyan-400">
+                    {category.icon}
+                  </div>
+                  <h3
+                    className={`text-base font-bold ${
+                      isDark ? "text-white" : "text-slate-900"
+                    }`}
+                  >
+                    {category.title}
+                  </h3>
                 </div>
 
+                <div className="flex flex-wrap gap-2 pt-1">
+                  {category.skills.map((skill) => (
+                    <span
+                      key={skill}
+                      className={`rounded-lg border px-3 py-1 text-xs font-semibold backdrop-blur-md transition ${
+                        isDark
+                          ? "border-cyan-400/20 bg-cyan-400/10 text-cyan-300 hover:border-cyan-400/40"
+                          : "border-cyan-600/20 bg-cyan-50 text-cyan-700 hover:border-cyan-600/40"
+                      }`}
+                    >
+                      {skill}
+                    </span>
+                  ))}
+                </div>
               </div>
             ))}
-
           </div>
+        </div>
       </SectionReveal>
-      </div>
     </section>
   );
 }

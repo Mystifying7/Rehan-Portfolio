@@ -1,11 +1,7 @@
 import { useEffect, useState } from "react";
-import {
-  motion,
-  useMotionValue,
-  useSpring,
-} from "framer-motion";
+import { motion, useMotionValue, useSpring } from "framer-motion";
 
-function CursorGlow() {
+export function CursorGlow() {
   const [visible, setVisible] = useState(false);
   const [hovering, setHovering] = useState(false);
   const [clicking, setClicking] = useState(false);
@@ -13,17 +9,15 @@ function CursorGlow() {
   const mouseX = useMotionValue(-100);
   const mouseY = useMotionValue(-100);
 
-  const smoothX = useSpring(mouseX, {
-    stiffness: 220,
-    damping: 24,
-    mass: 0.2,
-  });
+  // Trailing spring physics for spark trail
+  const spring1X = useSpring(mouseX, { stiffness: 350, damping: 25 });
+  const spring1Y = useSpring(mouseY, { stiffness: 350, damping: 25 });
 
-  const smoothY = useSpring(mouseY, {
-    stiffness: 220,
-    damping: 24,
-    mass: 0.2,
-  });
+  const spring2X = useSpring(mouseX, { stiffness: 220, damping: 22 });
+  const spring2Y = useSpring(mouseY, { stiffness: 220, damping: 22 });
+
+  const spring3X = useSpring(mouseX, { stiffness: 120, damping: 18 });
+  const spring3Y = useSpring(mouseY, { stiffness: 120, damping: 18 });
 
   useEffect(() => {
     const handleMouseMove = (event) => {
@@ -61,22 +55,55 @@ function CursorGlow() {
 
   return (
     <>
+      {/* Background Soft Glow Aura */}
       <motion.div
         aria-hidden="true"
-        className="pointer-events-none fixed left-0 top-0 z-[9995] hidden h-20 w-20 rounded-full bg-cyan-400/10 blur-2xl md:block"
+        className="pointer-events-none fixed left-0 top-0 z-[9994] hidden h-24 w-24 rounded-full bg-cyan-400/10 blur-2xl md:block"
         style={{
-          x: smoothX,
-          y: smoothY,
+          x: spring3X,
+          y: spring3Y,
           translateX: "-50%",
           translateY: "-50%",
         }}
         animate={{
-          opacity: visible ? (hovering ? 0.7 : 0.35) : 0,
-          scale: hovering ? 1.35 : 1,
+          opacity: visible ? (hovering ? 0.8 : 0.4) : 0,
+          scale: hovering ? 1.4 : 1,
         }}
-        transition={{ duration: 0.2 }}
       />
 
+      {/* Trailing Spark 3 (Smallest & Slowest) */}
+      <motion.div
+        aria-hidden="true"
+        className="pointer-events-none fixed left-0 top-0 z-[9995] hidden h-1.5 w-1.5 rounded-full bg-sky-400/60 shadow-[0_0_8px_#38bdf8] md:block"
+        style={{
+          x: spring2X,
+          y: spring2Y,
+          translateX: "-50%",
+          translateY: "-50%",
+        }}
+        animate={{
+          opacity: visible ? 0.6 : 0,
+          scale: hovering ? 1.3 : 1,
+        }}
+      />
+
+      {/* Trailing Spark 2 (Medium) */}
+      <motion.div
+        aria-hidden="true"
+        className="pointer-events-none fixed left-0 top-0 z-[9996] hidden h-2.5 w-2.5 rounded-full bg-cyan-300/80 shadow-[0_0_10px_#22d3ee] md:block"
+        style={{
+          x: spring1X,
+          y: spring1Y,
+          translateX: "-50%",
+          translateY: "-50%",
+        }}
+        animate={{
+          opacity: visible ? 0.8 : 0,
+          scale: hovering ? 1.2 : 1,
+        }}
+      />
+
+      {/* Main Neural Spark Diamond Core */}
       <motion.div
         aria-hidden="true"
         className="pointer-events-none fixed left-0 top-0 z-[9998] hidden md:block"
@@ -88,104 +115,37 @@ function CursorGlow() {
         }}
         animate={{
           opacity: visible ? 1 : 0,
-          scale: clicking ? 0.78 : hovering ? 1.18 : 1,
-          rotate: hovering ? 8 : 0,
+          scale: clicking ? 0.75 : hovering ? 1.4 : 1,
+          rotate: hovering ? 90 : 45,
         }}
         transition={{
-          scale: {
-            type: "spring",
-            stiffness: 420,
-            damping: 22,
-          },
-          rotate: {
-            duration: 0.2,
-          },
+          rotate: { duration: 0.3, ease: "easeInOut" },
+          scale: { type: "spring", stiffness: 400, damping: 20 },
         }}
       >
+        {/* SVG Glowing Diamond */}
         <svg
-          width="34"
-          height="40"
-          viewBox="0 0 34 40"
+          width="26"
+          height="26"
+          viewBox="0 0 26 26"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
-          className="drop-shadow-[0_0_8px_rgba(34,211,238,0.95)]"
+          className="drop-shadow-[0_0_12px_rgba(34,211,238,0.95)]"
         >
-          <path
-            d="M17 4V31"
-            stroke="rgb(103 232 249)"
-            strokeWidth="2.4"
-            strokeLinecap="round"
+          {/* Outer Diamond Shell */}
+          <polygon
+            points="13,2 24,13 13,24 2,13"
+            fill="rgba(34, 211, 238, 0.2)"
+            stroke="#22d3ee"
+            strokeWidth="2"
+            strokeLinejoin="round"
           />
 
-          <path
-            d="M17 12C12.5 12 9.5 9.5 9.5 5.5"
-            stroke="rgb(103 232 249)"
-            strokeWidth="2.4"
-            strokeLinecap="round"
-          />
+          {/* Inner Glowing Core Diamond */}
+          <polygon points="13,7 19,13 13,19 7,13" fill="#38bdf8" />
 
-          <path
-            d="M17 12C21.5 12 24.5 9.5 24.5 5.5"
-            stroke="rgb(103 232 249)"
-            strokeWidth="2.4"
-            strokeLinecap="round"
-          />
-
-          <path
-            d="M9.5 5.5L6.5 9"
-            stroke="rgb(103 232 249)"
-            strokeWidth="2.4"
-            strokeLinecap="round"
-          />
-
-          <path
-            d="M9.5 5.5L10 1.8"
-            stroke="rgb(103 232 249)"
-            strokeWidth="2.4"
-            strokeLinecap="round"
-          />
-
-          <path
-            d="M24.5 5.5L27.5 9"
-            stroke="rgb(103 232 249)"
-            strokeWidth="2.4"
-            strokeLinecap="round"
-          />
-
-          <path
-            d="M24.5 5.5L24 1.8"
-            stroke="rgb(103 232 249)"
-            strokeWidth="2.4"
-            strokeLinecap="round"
-          />
-
-          <path
-            d="M17 4L14.7 7.5"
-            stroke="rgb(103 232 249)"
-            strokeWidth="2.4"
-            strokeLinecap="round"
-          />
-
-          <path
-            d="M17 4L19.3 7.5"
-            stroke="rgb(103 232 249)"
-            strokeWidth="2.4"
-            strokeLinecap="round"
-          />
-
-          <path
-            d="M12.5 31H21.5"
-            stroke="rgb(103 232 249)"
-            strokeWidth="2.4"
-            strokeLinecap="round"
-          />
-
-          <path
-            d="M17 31V37"
-            stroke="rgb(103 232 249)"
-            strokeWidth="2.4"
-            strokeLinecap="round"
-          />
+          {/* Central Neural Node */}
+          <circle cx="13" cy="13" r="2" fill="#ffffff" />
         </svg>
       </motion.div>
     </>

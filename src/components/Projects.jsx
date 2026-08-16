@@ -1,210 +1,224 @@
-import { ExternalLink, Code2 } from "lucide-react";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import SectionReveal from "./SectionReveal";
+import { ExternalLink, Play, Code2, Sparkles, X } from "lucide-react";
+import { FaGithub } from "react-icons/fa";
 
-import Kavacham from "../assets/projects/Kavacham.mp4";
-import PropEng from "../assets/projects/PROP_ENGINE.mp4";
-import Virtual from "../assets/projects/Virtual_Steering.mp4";
-import AirCursor from "../assets/projects/Air-Cursor.mp4";
-import CineMindAI from "../assets/projects/CineMindAI.mp4";
-import { FaYoutube } from "react-icons/fa6";
-import { video } from "framer-motion/client";
-import { Code2Icon } from "lucide-react";
+import propEngineMedia from "../assets/projects/PROP_ENGINE.mp4";
+import airCursorMedia from "../assets/projects/Air-Cursor.mp4";
+import cineMindMedia from "../assets/projects/CineMindAI.mp4";
+import kavachamMedia from "../assets/projects/Kavacham.mp4";
+import virtualSteeringMedia from "../assets/projects/Virtual_Steering.mp4";
 
 const projects = [
   {
     title: "Kavacham",
-    category: "Cyber Security",
-    video: Kavacham,
-    description:
-      "Detect outbound personal-data exposure, inspect third-party APK risk, preserve encrypted evidence, prepare erasure requests, and organise a reviewable escalation timeline.",
-    stack: ["React"
-,"TypeScript"
-,"Vite"
-,"React Router "
-,"Tailwind CSS "
-,"Zod "
-,"Lucide React"
-,"Web Crypto API"
-,"IndexedDB"],
+    tagline: "Cyber Security & Digital Evidence Preservation",
+    type: "video",
+    media: kavachamMedia,
     github: "https://github.com/hackerskr76/Kavacham-Citadel1.0",
-    Youtube : "https://youtu.be/BeWeT9qgZ6U?si=_m7GKTOtG2QgaveM",
+    demo: "",
+    tags: ["Cyber Security", "Digital Forensics", "React", "Python"],
+    description:
+      "A security application built for evidence integrity, chain of custody logging, and digital artifact preservation.",
   },
   {
     title: "PROP_ENGINE.ai",
-    category: "Full-Stack, Machine Learning, PropTech",
-    video: PropEng,
-    description:
-      "A full-stack predictive web application built with React and Flask that leverages Scikit-Learn machine learning models to provide accurate, real-time real estate valuations across multiple Indian cities based on historical data vectors.",
-    stack: ["React.js", "Tailwind CSS", "Python", "Flask", "Scikit-Learn", "Pandas", "Vercel", "Render"],
+    tagline: "ML Real Estate Valuation Platform",
+    type: "video",
+    media: propEngineMedia,
     github: "https://github.com/Mystifying7/House_Price_Project",
-    live: "https://house-price-project-ten.vercel.app/"
+    demo: "",
+    tags: ["Machine Learning", "Scikit-Learn", "FastAPI", "React"],
+    description:
+      "Machine learning real estate pricing engine that predicts property valuations using historical trend analytics.",
   },
   {
-    title: "Virtual-Steering-Wheel-Master",
-    category: "Computer Vision, Human-Computer Interaction (HCI), and Gaming Utilities",
-    video: Virtual,
+    title: "Virtual Steering Wheel",
+    tagline: "CV Hand Gesture Driving Utility",
+    type: "video",
+    media: virtualSteeringMedia,
+    github: "https://github.com/Mystifying7/virtual-steering-wheel-master",
+    demo: "",
+    tags: ["Computer Vision", "OpenCV", "MediaPipe", "Python"],
     description:
-      "A computer vision-based Python application built with OpenCV that leverages real-time hand-tracking algorithms to provide accurate, low-latency virtual steering controls based on live webcam video feeds.",
-    stack: ["Python", "OpenCV", "MediaPipe", "NumPy", "pynput"],
-    github: "https://github.com/Mystifying7/virtual-steering-wheel-master"
+      "Real-time computer vision utility translating hand gestures into steering controls for driving simulators.",
   },
   {
     title: "Air-Cursor",
-    category: "Computer Vision, Full-Stack, Human-Computer Interaction",
-    video: AirCursor,
+    tagline: "WebSocket Spatial Hand Gesture Control",
+    type: "video",
+    media: airCursorMedia,
+    github: "https://github.com/Mystifying7/AirCursor",
+    demo: "",
+    tags: ["OpenCV", "MediaPipe", "WebSockets", "Node.js"],
     description:
-      "A real-time, gesture-controlled interactive web portfolio built with Python and Vanilla JavaScript that leverages MediaPipe and WebSockets to enable entirely hands-free spatial navigation and seamless frontend interactions without a physical mouse.",
-    stack: ["Python", "OpenCV", "MediaPipe", "WebSockets", "JavaScript", "HTML5", "CSS3"],
-    github: "https://github.com/Mystifying7/AirCursor"
+      "Spatial hand-tracking gesture system controlling mouse cursors wirelessly over low-latency WebSockets.",
   },
   {
     title: "CineMind AI",
-    category: "AI / Full Stack",
-    video: CineMindAI,
+    tagline: "NLP Content Recommendation Engine",
+    type: "video",
+    media: cineMindMedia,
+    github: "https://github.com/Mystifying7/Movie-Recommendation-System",
+    demo: "",
+    tags: ["NLP", "TF-IDF Vectorization", "Flask", "Tailwind CSS"],
     description:
-      "An AI-powered content-based movie recommender built with FastAPI and Vanilla JS. Uses NLP (CountVectorizer & PorterStemmer) and Cosine Similarity to compute real-time vector distances across 4,800+ films, paired with a Glassmorphism UI and LocalStorage watchlist.",
-    stack: ["Python", "FastAPI", "Scikit-Learn", "NLP", "JavaScript", "HTML/CSS"],
-    github: "https://github.com/Mystifying7/Movie-Recommendation-System"
+      "Natural Language Processing movie recommendation system parsing plot summaries and genre vectors.",
   },
 ];
 
-function Projects() {
+function Projects({ theme = "dark" }) {
+  const [activeMedia, setActiveMedia] = useState(null);
+  const isDark = theme === "dark";
+
   return (
     <section id="projects" className="px-6 py-10">
-      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan-400/60 to-transparent opacity-0 transition duration-300 group-hover:opacity-100" />
-      <div className="
-group
-relative
-overflow-hidden
-rounded-2xl
-border
-border-white/10
-bg-white/[0.03]
-backdrop-blur-xl
-p-4
-shadow-lg
-shadow-cyan-500/5
-transition-all
-duration-300
-hover:-translate-y-1
-hover:border-cyan-400/30
-hover:bg-cyan-400/[0.04]
-hover:shadow-cyan-400/10
-">
       <SectionReveal>
-        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan-400/60 to-transparent opacity-0 transition duration-300 group-hover:opacity-100" />
-
-          {/* Heading */}
-          <div className="mb-7 text-center">
-            <p className="text-xs font-semibold uppercase tracking-[0.35em] text-cyan-400">
+        <div
+          className={`mx-auto max-w-6xl rounded-3xl border p-6 shadow-2xl backdrop-blur-xl transition duration-300 ${isDark
+              ? "border-white/10 bg-slate-900/50 hover:border-cyan-400/40"
+              : "border-slate-200 bg-white/80 hover:border-cyan-500/40 shadow-slate-300/40"
+            }`}
+        >
+          {/* Header */}
+          <div className="mb-8 text-center">
+            <p
+              className={`text-xs font-bold uppercase tracking-[0.35em] ${isDark ? "text-cyan-400" : "text-cyan-600"
+                }`}
+            >
               Projects
             </p>
-
-            <h2 className="mt-2 text-3xl font-bold">
-              Featured Projects
+            <h2
+              className={`mt-2 text-3xl font-extrabold ${isDark ? "text-white" : "text-slate-900"
+                }`}
+            >
+              Featured AI & Engineering Systems
             </h2>
-
-            <p className="mx-auto mt-2 max-w-lg text-sm text-slate-400">
-              AI, Machine Learning and Software Development Projects.
+            <p
+              className={`mx-auto mt-2 max-w-lg text-sm ${isDark ? "text-slate-400" : "text-slate-600"
+                }`}
+            >
+              High-performance applications built with Machine Learning, Computer Vision, and Web tech.
             </p>
           </div>
 
-          {/* Cards */}
-          <div className="grid gap-3 md:grid-cols-3">
+          {/* 3-Column Grid */}
+          <div className="grid gap-5 md:grid-cols-3">
             {projects.map((project) => (
               <div
                 key={project.title}
-                className="group overflow-hidden rounded-xl border border-white/10 bg-gradient-to-b from-slate-900 to-slate-950 shadow-lg shadow-cyan-500/5 transition-all duration-300 hover:-translate-y-1 hover:border-cyan-400/30 hover:shadow-cyan-400/10"
+                className={`group flex flex-col justify-between overflow-hidden rounded-2xl border backdrop-blur-xl transition-all duration-300 ${isDark
+                    ? "border-white/10 bg-slate-950/70 hover:border-cyan-400/40"
+                    : "border-slate-200 bg-slate-50 hover:border-cyan-500/40"
+                  }`}
               >
-                {/* Video */}
-                <div className="aspect-video overflow-hidden">
+                {/* Media Container */}
+                <div
+                  onClick={() => setActiveMedia(project)}
+                  className="relative aspect-[16/9] w-full cursor-pointer overflow-hidden bg-slate-900"
+                >
                   <video
-                    src={project.video}
-                    autoPlay
+                    src={project.media}
                     muted
                     loop
                     playsInline
-                    className="h-full w-full object-cover"
+                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                   />
+                  <div className="absolute inset-0 bg-slate-950/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-full bg-cyan-400 text-slate-950 shadow-lg">
+                      <Play size={18} />
+                    </div>
+                  </div>
                 </div>
 
                 {/* Content */}
-                <div className="p-3">
-
-                  <span className="inline-flex rounded-full bg-cyan-400/10 px-2 py-[2px] text-[10px] font-medium text-cyan-300">
-                    {project.category}
-                  </span>
-
-                  <h3 className="mt-1.5 text-[15px] font-semibold text-white">
-                    {project.title}
-                  </h3>
-
-                  <p className="mt-1.5 text-[11px] leading-4 text-slate-400">
-                    {project.description}
-                  </p>
-
-                  <div className="mt-2 flex flex-wrap gap-1">
-                    {project.stack.map((item) => (
-                      <span
-                        key={item}
-                        className="rounded-full border border-white/10 px-1.5 py-[2px] text-[10px] text-slate-300"
-                      >
-                        {item}
-                      </span>
-                    ))}
+                <div className="p-4 flex-1 flex flex-col justify-between">
+                  <div>
+                    <h3
+                      className={`text-base font-bold ${isDark ? "text-white" : "text-slate-900"
+                        }`}
+                    >
+                      {project.title}
+                    </h3>
+                    <p
+                      className={`mt-1 text-xs font-semibold ${isDark ? "text-cyan-300" : "text-cyan-600"
+                        }`}
+                    >
+                      {project.tagline}
+                    </p>
+                    <p
+                      className={`mt-2 text-xs leading-5 line-clamp-2 ${isDark ? "text-slate-400" : "text-slate-600"
+                        }`}
+                    >
+                      {project.description}
+                    </p>
                   </div>
 
-                  <div className="mt-3 flex gap-2">
+                  <div className="mt-4 pt-3 border-t border-white/10 flex flex-col gap-3">
+                    <div className="flex flex-wrap gap-1">
+                      {project.tags.map((t) => (
+                        <span
+                          key={t}
+                          className={`rounded-md border px-2 py-0.5 text-[10px] font-semibold ${isDark
+                              ? "border-cyan-400/20 bg-cyan-400/10 text-cyan-300"
+                              : "border-cyan-600/20 bg-cyan-50 text-cyan-700"
+                            }`}
+                        >
+                          {t}
+                        </span>
+                      ))}
+                    </div>
 
-  {/* GitHub */}
-  {project.github && (
-    <a
-      href={project.github}
-      target="_blank"
-      rel="noreferrer"
-      className="flex flex-1 items-center justify-center gap-1 rounded-lg border border-white/10 py-1.5 text-[10px] font-semibold text-slate-300 transition hover:border-cyan-400/40 hover:text-cyan-300"
-    >
-      <Code2 size={12} />
-      Code
-    </a>
-  )}
-
-  {/* YouTube Demo */}
-  {project.Youtube && (
-    <a
-      href={project.Youtube}
-      target="_blank"
-      rel="noreferrer"
-      className="flex flex-1 items-center justify-center gap-1 rounded-lg bg-red-600 py-1.5 text-[10px] font-bold text-white transition hover:bg-red-500"
-    >
-      <FaYoutube size={12} />
-      Demo
-    </a>
-  )}
-
-  {/* Live Demo */}
-  {project.live && (
-    <a
-      href={project.live}
-      target="_blank"
-      rel="noreferrer"
-      className="flex flex-1 items-center justify-center gap-1 rounded-lg bg-cyan-400 py-1.5 text-[10px] font-bold text-slate-950 transition hover:bg-cyan-300"
-    >
-      <ExternalLink size={12} />
-      Live
-    </a>
-  )}
-
-</div>
+                    <a
+                      href={project.github}
+                      target="_blank"
+                      rel="noreferrer"
+                      className={`inline-flex items-center gap-1.5 text-xs font-bold transition ${isDark
+                          ? "text-slate-300 hover:text-cyan-400"
+                          : "text-slate-700 hover:text-cyan-600"
+                        }`}
+                    >
+                      <FaGithub size={14} /> View Code Base
+                    </a>
                   </div>
-
                 </div>
-    
+              </div>
             ))}
           </div>
-
+        </div>
       </SectionReveal>
-      </div>
+
+      {/* Video Modal */}
+      <AnimatePresence>
+        {activeMedia && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setActiveMedia(null)}
+            className="fixed inset-0 z-[9999] flex items-center justify-center bg-slate-950/80 p-4 backdrop-blur-md"
+          >
+            <div
+              onClick={(e) => e.stopPropagation()}
+              className="relative w-full max-w-4xl overflow-hidden rounded-2xl border border-cyan-400/40 bg-slate-950 p-2 shadow-2xl"
+            >
+              <button
+                onClick={() => setActiveMedia(null)}
+                className="absolute top-4 right-4 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-slate-900 text-white hover:bg-cyan-400 hover:text-slate-950"
+              >
+                <X size={18} />
+              </button>
+              <video
+                src={activeMedia.media}
+                controls
+                autoPlay
+                className="w-full rounded-xl"
+              />
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }

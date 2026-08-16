@@ -1,44 +1,66 @@
-import { Mail } from "lucide-react";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
+import { Mail } from "lucide-react";
+import LogoSVG from "./LogoSVG";
 
-function Footer() {
-  const links = ["Home", "About", "Skills", "Projects", "Hackathons", "Education", "Certifications"];
+function Footer({ theme = "dark" }) {
+  const isDark = theme === "dark";
 
   return (
-    <footer className="px-6 py-10">
-      <div className="mx-auto max-w-5xl">
-        <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] p-5 shadow-lg shadow-cyan-500/5 backdrop-blur-xl">
-          <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan-400/60 to-transparent" />
+    <footer
+      className={`border-t py-8 px-6 backdrop-blur-xl transition duration-300 ${
+        isDark
+          ? "border-white/10 bg-slate-950/80 text-slate-400"
+          : "border-slate-300 bg-white/90 text-slate-600"
+      }`}
+    >
+      <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 md:flex-row">
+        {/* Left Brand */}
+        <div className="flex items-center gap-2">
+          <LogoSVG className="h-6 w-6" />
+          <span
+            className={`text-xs font-bold ${
+              isDark ? "text-white" : "text-slate-900"
+            }`}
+          >
+            Md Rehan Alam • AI & ML Portfolio
+          </span>
+        </div>
 
-          <div className="flex flex-col items-center justify-between gap-6 md:flex-row">
-            <div className="text-center md:text-left">
-              <h2 className="text-xl font-black text-white">
-                REHAN <span className="text-cyan-400">ALAM</span>
-              </h2>
-              <p className="mt-1 text-xs text-slate-400">
-                AI • Machine Learning • Software Development
-              </p>
-            </div>
+        {/* Center Copyright */}
+        <p className="text-xs font-medium">
+          © {new Date().getFullYear()} Md Rehan Alam. All rights reserved.
+        </p>
 
-            <div className="flex flex-wrap justify-center gap-4 text-sm">
-              {links.map((link) => (
-                <a
-                  key={link}
-                  href={`#${link.toLowerCase()}`}
-                  className="text-slate-400 transition hover:text-cyan-400"
-                >
-                  {link}
-                </a>
-              ))}
-            </div>
-          </div>
-
-          <div className="my-5 h-px bg-white/10"/>
-
-          <div className="flex flex-col items-center justify-center gap-2 text-xs text-slate-500 md:flex-row">
-            <p>© {new Date().getFullYear()} Rehan Alam. All Rights Reserved.</p>
-            Last Updated • {new Date().getFullYear()}
-          </div>
+        {/* Right Links */}
+        <div className="flex items-center gap-4">
+          <a
+            href="https://github.com/mystifying7"
+            target="_blank"
+            rel="noreferrer"
+            className={`transition ${
+              isDark ? "hover:text-cyan-400" : "hover:text-cyan-600"
+            }`}
+          >
+            <FaGithub size={16} />
+          </a>
+          <a
+            href="https://www.linkedin.com/in/rehanalam07/"
+            target="_blank"
+            rel="noreferrer"
+            className={`transition ${
+              isDark ? "hover:text-cyan-400" : "hover:text-cyan-600"
+            }`}
+          >
+            <FaLinkedin size={16} />
+          </a>
+          <a
+            href="mailto:rehanalam700000@gmail.com"
+            className={`transition ${
+              isDark ? "hover:text-cyan-400" : "hover:text-cyan-600"
+            }`}
+          >
+            <Mail size={16} />
+          </a>
         </div>
       </div>
     </footer>

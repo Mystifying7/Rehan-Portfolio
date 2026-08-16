@@ -19,3 +19,19 @@ body {
     cursor: none !important;
   }
 }
+
+/* Hide Spline Watermark Badge & Logo Overlay */
+canvas + a,
+canvas + div,
+#logo,
+#spline-logo,
+#spline-watermark,
+a[href*="spline"],
+a[href*="spline.design"],
+[class*="spline-watermark"],
+div:has(> a[href*="spline"]) {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
