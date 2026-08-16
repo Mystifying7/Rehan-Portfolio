@@ -1,6 +1,5 @@
-import { motion } from "framer-motion";
 import SectionReveal from "./SectionReveal";
-import { Brain, Code2, Layers, Cpu, Server, Wrench } from "lucide-react";
+import { Brain, Code2, Server, Wrench } from "lucide-react";
 
 const skillCategories = [
   {

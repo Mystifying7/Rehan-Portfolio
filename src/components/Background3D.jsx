@@ -14,7 +14,13 @@ export function Background3D({ theme = "dark" }) {
           100% { background-position: 48px 48px; }
         }
         .animated-grid {
-          animation: gridMove 8s linear infinite;
+          transform: translateZ(0);
+          will-change: auto;
+        }
+        @media (min-width: 769px) {
+          .animated-grid {
+            animation: gridMove 12s linear infinite;
+          }
         }
       `}</style>
       <div

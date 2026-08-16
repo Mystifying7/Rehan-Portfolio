@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import SectionReveal from "./SectionReveal";
 import { Trophy, CalendarDays, Users, Clock, Award } from "lucide-react";
 import { FaGithub } from "react-icons/fa";

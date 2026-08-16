@@ -19,6 +19,8 @@ export function ThreeIDCard() {
 
   const handleMouseMove = (e) => {
     if (isDragging || !cardRef.current) return;
+    if (typeof window !== "undefined" && window.matchMedia("(pointer: coarse)").matches) return;
+
     const rect = cardRef.current.getBoundingClientRect();
     const width = rect.width;
     const height = rect.height;
@@ -26,8 +28,8 @@ export function ThreeIDCard() {
     const mouseX = e.clientX - rect.left;
     const mouseY = e.clientY - rect.top;
 
-    const rX = ((mouseY - height / 2) / (height / 2)) * -14;
-    const rY = ((mouseX - width / 2) / (width / 2)) * 14;
+    const rX = ((mouseY - height / 2) / (height / 2)) * -12;
+    const rY = ((mouseX - width / 2) / (width / 2)) * 12;
 
     setRotateX(rX);
     setRotateY(rY);
@@ -41,9 +43,12 @@ export function ThreeIDCard() {
   };
 
   return (
-    <div className="relative flex flex-col items-center justify-center py-2 [perspective:1000px] select-none">
+    <div
+      style={{ touchAction: "pan-y" }}
+      className="relative flex flex-col items-center justify-center py-2 [perspective:1000px] select-none"
+    >
       {/* 1. Long Lanyard Fabric Strap extending to Top */}
-      <div className="relative flex flex-col items-center">
+      <div className="relative flex flex-col items-center pointer-events-none">
         <div className="h-28 w-6 bg-slate-950 border-x border-cyan-400/30 flex flex-col items-center justify-around shadow-xl">
           {/* Lanyard Logo Accents */}
           <div className="flex flex-col items-center gap-1 opacity-80">
@@ -91,6 +96,7 @@ export function ThreeIDCard() {
           rotateX: rotateX,
           rotateY: rotateY,
           transformStyle: "preserve-3d",
+          touchAction: "pan-y",
         }}
         className="group relative -mt-3.5 cursor-grab active:cursor-grabbing w-80 sm:w-84 h-[440px] overflow-hidden rounded-3xl border-2 border-slate-800 bg-slate-950 shadow-2xl shadow-cyan-500/20"
       >
@@ -119,6 +125,8 @@ export function ThreeIDCard() {
               <img
                 src={profile}
                 alt="Md Rehan Alam"
+                loading="eager"
+                decoding="async"
                 className="h-full w-full object-cover object-top filter contrast-105"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-80" />
@@ -133,7 +141,7 @@ export function ThreeIDCard() {
           </div>
         </div>
 
-        {/* 4. Bottom Nameplate Badge (Matching Reference Layout) */}
+        {/* 4. Bottom Nameplate Badge */}
         <div className="absolute bottom-4 left-4 right-4 z-20 flex flex-col items-center">
           <div className="w-full rounded-2xl bg-white p-3 shadow-2xl text-center border border-slate-200">
             <h4 className="text-sm font-black uppercase tracking-wide text-slate-950">
@@ -144,12 +152,12 @@ export function ThreeIDCard() {
             </div>
           </div>
 
-          {/* Decorative Cyan Accent Flares (Bottom Corners) */}
-          <div className="absolute -bottom-2 -right-2 -z-10 h-14 w-14 rounded-full bg-cyan-400/30 blur-md" />
+          {/* Decorative Cyan Accent Flare */}
+          <div className="absolute -bottom-2 -right-2 -z-10 h-14 w-14 rounded-full bg-cyan-400/30 blur-md pointer-events-none" />
         </div>
 
         {/* Drag Touch Hint Badge */}
-        <div className="absolute top-4 right-3 z-30 rounded-full border border-cyan-400/30 bg-slate-950/80 px-2 py-0.5 text-[8px] font-bold text-cyan-300 backdrop-blur-md">
+        <div className="absolute top-4 right-3 z-30 rounded-full border border-cyan-400/30 bg-slate-950/90 px-2 py-0.5 text-[8px] font-bold text-cyan-300">
           {isDragging ? "SWINGING" : "DRAG ME"}
         </div>
       </motion.div>

@@ -1,6 +1,5 @@
-import { motion } from "framer-motion";
 import SectionReveal from "./SectionReveal";
-import { Sparkles, Brain, Code2, Rocket } from "lucide-react";
+import { Brain, Code2, Rocket } from "lucide-react";
 import InteractiveRobot from "./InteractiveRobot";
 
 function About({ theme = "dark" }) {

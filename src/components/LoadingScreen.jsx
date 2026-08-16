@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import InteractiveRobot from "./InteractiveRobot";
 import { Sparkles, Cpu, Terminal } from "lucide-react";
 
 const LOADING_STEPS = [
@@ -16,17 +15,16 @@ export function LoadingScreen({ onFinish }) {
   const [stepIndex, setStepIndex] = useState(0);
 
   useEffect(() => {
-    // Increased duration slightly for visitors to enjoy watching the waving 3D robot
     const interval = setInterval(() => {
       setProgress((prev) => {
         if (prev >= 100) {
           clearInterval(interval);
           setTimeout(() => {
             if (onFinish) onFinish();
-          }, 400);
+          }, 300);
           return 100;
         }
-        const next = prev + Math.floor(Math.random() * 5) + 3;
+        const next = prev + Math.floor(Math.random() * 8) + 5;
         const boundedNext = Math.min(next, 100);
 
         const sIndex = Math.min(
@@ -37,7 +35,7 @@ export function LoadingScreen({ onFinish }) {
 
         return boundedNext;
       });
-    }, 140);
+    }, 60);
 
     return () => clearInterval(interval);
   }, [onFinish]);
@@ -54,14 +52,22 @@ export function LoadingScreen({ onFinish }) {
         {/* Background Radial Glow */}
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(34,211,238,0.18),transparent_65%)]" />
 
-        {/* Central Automatic Waving 3D AI Robot Avatar (compact size for loading screen) */}
-        <div className="relative mb-2 flex items-center justify-center">
+        {/* Central Glowing AI Neural Core */}
+        <div className="relative mb-6 flex items-center justify-center">
           <motion.div
-            initial={{ scale: 0.85, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 0.6 }}
+            animate={{
+              scale: [1, 1.08, 1],
+            }}
+            transition={{
+              duration: 2.5,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+            className="relative flex h-24 w-24 items-center justify-center rounded-3xl border border-cyan-400/40 bg-gradient-to-tr from-cyan-950/80 via-slate-900 to-sky-950/80 shadow-[0_0_35px_rgba(34,211,238,0.35)] backdrop-blur-xl"
           >
-            <InteractiveRobot theme="dark" compact={true} />
+            <div className="absolute inset-1.5 rounded-2xl border border-cyan-300/30 bg-slate-950/90 flex items-center justify-center">
+              <Cpu size={32} className="text-cyan-400 animate-pulse" />
+            </div>
           </motion.div>
         </div>
 

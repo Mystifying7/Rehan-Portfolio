@@ -2,6 +2,10 @@ import { useEffect, useState } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
 
 export function CursorGlow() {
+  const [enabled] = useState(() => {
+    if (typeof window === "undefined") return false;
+    return !window.matchMedia("(pointer: coarse)").matches && window.innerWidth >= 768;
+  });
   const [visible, setVisible] = useState(false);
   const [hovering, setHovering] = useState(false);
   const [clicking, setClicking] = useState(false);
@@ -9,7 +13,7 @@ export function CursorGlow() {
   const mouseX = useMotionValue(-100);
   const mouseY = useMotionValue(-100);
 
-  // Trailing spring physics for spark trail
+  // Trailing spring physics for spark trail (only active on desktop)
   const spring1X = useSpring(mouseX, { stiffness: 350, damping: 25 });
   const spring1Y = useSpring(mouseY, { stiffness: 350, damping: 25 });
 
@@ -20,13 +24,15 @@ export function CursorGlow() {
   const spring3Y = useSpring(mouseY, { stiffness: 120, damping: 18 });
 
   useEffect(() => {
+    if (!enabled) return;
+
     const handleMouseMove = (event) => {
       mouseX.set(event.clientX);
       mouseY.set(event.clientY);
       setVisible(true);
 
       const target = event.target;
-      const interactive = target.closest(
+      const interactive = target && target.closest(
         "a, button, input, textarea, select, [role='button']"
       );
 
@@ -38,11 +44,11 @@ export function CursorGlow() {
     const handleMouseLeave = () => setVisible(false);
     const handleMouseEnter = () => setVisible(true);
 
-    window.addEventListener("mousemove", handleMouseMove);
-    window.addEventListener("mousedown", handleMouseDown);
-    window.addEventListener("mouseup", handleMouseUp);
-    document.addEventListener("mouseleave", handleMouseLeave);
-    document.addEventListener("mouseenter", handleMouseEnter);
+    window.addEventListener("mousemove", handleMouseMove, { passive: true });
+    window.addEventListener("mousedown", handleMouseDown, { passive: true });
+    window.addEventListener("mouseup", handleMouseUp, { passive: true });
+    document.addEventListener("mouseleave", handleMouseLeave, { passive: true });
+    document.addEventListener("mouseenter", handleMouseEnter, { passive: true });
 
     return () => {
       window.removeEventListener("mousemove", handleMouseMove);
@@ -51,7 +57,9 @@ export function CursorGlow() {
       document.removeEventListener("mouseleave", handleMouseLeave);
       document.removeEventListener("mouseenter", handleMouseEnter);
     };
-  }, [mouseX, mouseY]);
+  }, [enabled, mouseX, mouseY]);
+
+  if (!enabled) return null;
 
   return (
     <>

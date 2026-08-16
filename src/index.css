@@ -2,6 +2,7 @@
 
 html {
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
@@ -9,10 +10,13 @@ body {
   background: #020617;
   color: white;
   font-family: "Inter", sans-serif;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Custom Trident Cursor — Desktop Only */
-@media (min-width: 768px) {
+/* Custom Cursor — Desktop Only with fine pointer */
+@media (min-width: 768px) and (pointer: fine) {
   *,
   *::before,
   *::after {
@@ -34,4 +38,59 @@ div:has(> a[href*="spline"]) {
   visibility: hidden !important;
   opacity: 0 !important;
   pointer-events: none !important;
+}
+
+/* Hardware accelerated transitions */
+* {
+  box-sizing: border-box;
+}
+
+/* Smooth selection */
+::selection {
+  background-color: rgba(34, 211, 238, 0.3);
+  color: #ffffff;
+}
+
+/* Android & Mobile Performance Overrides */
+@media (max-width: 768px) {
+  /* Disable expensive backdrop-filter blur on mobile to lock 60-120 FPS */
+  .backdrop-blur-xl,
+  .backdrop-blur-2xl,
+  .backdrop-blur-md,
+  .backdrop-blur-lg,
+  [class*="backdrop-blur"] {
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+  }
+
+  /* Provide sleek solid gradient backdrops on mobile for identical visuals with zero GPU lag */
+  .bg-slate-900\/50,
+  .bg-slate-900\/60,
+  .bg-slate-900\/70,
+  .bg-slate-900\/80 {
+    background-color: rgba(15, 23, 42, 0.94) !important;
+  }
+
+  .bg-slate-950\/50,
+  .bg-slate-950\/60,
+  .bg-slate-950\/70,
+  .bg-slate-950\/80,
+  .bg-slate-950\/90 {
+    background-color: rgba(2, 6, 23, 0.96) !important;
+  }
+
+  .bg-white\/80,
+  .bg-white\/90 {
+    background-color: rgba(255, 255, 255, 0.97) !important;
+  }
+
+  /* Eliminate tap delay & tap flash on Android */
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Enable smooth kinetic touch scrolling */
+  main {
+    -webkit-overflow-scrolling: touch;
+  }
 }

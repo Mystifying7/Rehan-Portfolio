@@ -2,26 +2,26 @@ import { useEffect, useState } from "react";
 import { Menu, X, Sun, Moon } from "lucide-react";
 import LogoSVG from "./LogoSVG";
 
+const LINKS = [
+  "Home",
+  "About",
+  "Skills",
+  "Projects",
+  "Hackathons",
+  "Education",
+  "Journey",
+  "Certifications",
+];
+
 function Navbar({ theme, toggleTheme }) {
   const [active, setActive] = useState("home");
   const [open, setOpen] = useState(false);
-
-  const links = [
-    "Home",
-    "About",
-    "Skills",
-    "Projects",
-    "Hackathons",
-    "Education",
-    "Journey",
-    "Certifications",
-  ];
 
   useEffect(() => {
     const handleScroll = () => {
       let current = "home";
 
-      const allSections = [...links.map((link) => link.toLowerCase()), "contact"];
+      const allSections = [...LINKS.map((link) => link.toLowerCase()), "contact"];
 
       allSections.forEach((id) => {
         const section = document.getElementById(id);
@@ -66,7 +66,7 @@ function Navbar({ theme, toggleTheme }) {
 
         {/* Navigation Links */}
         <div className="hidden items-center gap-4 md:flex">
-          {links.map((link) => {
+          {LINKS.map((link) => {
             const id = link.toLowerCase();
             const isActive = active === id;
 
@@ -136,7 +136,7 @@ function Navbar({ theme, toggleTheme }) {
           }`}
         >
           <div className="flex flex-col gap-3">
-            {[...links, "Contact"].map((link) => {
+            {[...LINKS, "Contact"].map((link) => {
               const id = link.toLowerCase();
 
               return (

@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import SectionReveal from "./SectionReveal";
 import { Code2, Award, Rocket, GraduationCap } from "lucide-react";
 
