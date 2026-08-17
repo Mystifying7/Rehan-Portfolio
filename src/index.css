@@ -17,6 +17,7 @@ body {
 
 /* Custom Cursor — Desktop Only with fine pointer */
 @media (min-width: 768px) and (pointer: fine) {
+
   *,
   *::before,
   *::after {
@@ -25,24 +26,42 @@ body {
 }
 
 /* Hide Spline Watermark Badge & Logo Overlay */
-canvas + a,
-canvas + div,
-#logo,
 #spline-logo,
+#logo,
 #spline-watermark,
-a[href*="spline"],
 a[href*="spline.design"],
+a[href*="spline.com"],
+a[href*="spline"],
 [class*="spline-watermark"],
-div:has(> a[href*="spline"]) {
+[class*="spline-logo"],
+div:has(> a[href*="spline"]),
+div[id*="spline"] a,
+div[class*="spline"] a,
+spline-viewer::part(logo),
+spline-viewer #logo,
+spline-viewer a {
   display: none !important;
   visibility: hidden !important;
   opacity: 0 !important;
   pointer-events: none !important;
+  position: absolute !important;
+  width: 0 !important;
+  height: 0 !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  clip-path: inset(50%) !important;
+  z-index: -9999 !important;
 }
 
-/* Hardware accelerated transitions */
+/* Hardware accelerated transitions & Layer Containment */
 * {
   box-sizing: border-box;
+}
+
+section {
+  contain: layout style;
+  transform: translateZ(0);
+  will-change: auto;
 }
 
 /* Smooth selection */
@@ -53,6 +72,7 @@ div:has(> a[href*="spline"]) {
 
 /* Android & Mobile Performance Overrides */
 @media (max-width: 768px) {
+
   /* Disable expensive backdrop-filter blur on mobile to lock 60-120 FPS */
   .backdrop-blur-xl,
   .backdrop-blur-2xl,

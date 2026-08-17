@@ -23,6 +23,25 @@ export function CursorGlow() {
   const spring3X = useSpring(mouseX, { stiffness: 120, damping: 18 });
   const spring3Y = useSpring(mouseY, { stiffness: 120, damping: 18 });
 
+  const [isScrolling, setIsScrolling] = useState(false);
+
+  useEffect(() => {
+    if (!enabled) return;
+
+    let scrollTimeout;
+    const handleScroll = () => {
+      setIsScrolling(true);
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(() => setIsScrolling(false), 100);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      clearTimeout(scrollTimeout);
+    };
+  }, [enabled]);
+
   useEffect(() => {
     if (!enabled) return;
 
@@ -59,7 +78,7 @@ export function CursorGlow() {
     };
   }, [enabled, mouseX, mouseY]);
 
-  if (!enabled) return null;
+  if (!enabled || isScrolling) return null;
 
   return (
     <>

@@ -2,19 +2,16 @@ import { useState } from "react";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import About from "./components/About";
-import Skills from "./components/Skills";
-import Projects from "./components/Projects";
-import Education from "./components/Education";
-import Experience from "./components/Experience";
-import Certifications from "./components/Certifications";
+import PortfolioShowcase from "./components/PortfolioShowcase";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import BackToTop from "./components/BackToTop";
 import Stats from "./components/Stats";
 import LoadingScreen from "./components/LoadingScreen";
-import Hackathons from "./components/Hackathons";
 import CursorGlow from "./components/CursorGlow";
 import Background3D from "./components/Background3D";
+import AboutMarquee from "./components/AboutMarquee";
+
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -47,13 +44,9 @@ function App() {
         <Navbar theme={theme} toggleTheme={toggleTheme} />
         <Hero theme={theme} />
         <Stats theme={theme} />
+        <AboutMarquee theme={theme} />
         <About theme={theme} />
-        <Skills theme={theme} />
-        <Projects theme={theme} />
-        <Hackathons theme={theme} />
-        <Education theme={theme} />
-        <Experience theme={theme} />
-        <Certifications theme={theme} />
+        <PortfolioShowcase theme={theme} />
         <Contact theme={theme} />
         <Footer theme={theme} />
         <BackToTop theme={theme} />
