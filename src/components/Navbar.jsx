@@ -11,7 +11,7 @@ const NAV_LINKS = [
   { name: "Skills", href: "#skills", id: "skills", tab: "skills" },
   { name: "Certificates", href: "#certificates", id: "certificates", tab: "certificates" },
   { name: "Hackathons", href: "#hackathons", id: "hackathons", tab: "hackathons" },
-  { name: "Journey", href: "#education", id: "education", tab: "education" },
+  { name: "Education", href: "#education", id: "education", tab: "education" },
 ];
 
 function Navbar({ theme, toggleTheme }) {
