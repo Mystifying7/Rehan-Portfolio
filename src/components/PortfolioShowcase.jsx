@@ -29,6 +29,7 @@ import {
   CheckCircle2,
   Download,
   FileText,
+  Search,
 } from "lucide-react";
 import { FaGithub } from "react-icons/fa";
 
@@ -38,6 +39,7 @@ import airCursorMedia from "../assets/projects/Air-Cursor.mp4";
 import cineMindMedia from "../assets/projects/CineMindAI.mp4";
 import kavachamMedia from "../assets/projects/Kavacham.mp4";
 import virtualSteeringMedia from "../assets/projects/Virtual_Steering.mp4";
+import hybrid from "../assets/projects/Hybrid-RAG.mp4";
 
 // Education Image imports
 import universityImg from "../assets/images/university.jpg";
@@ -64,6 +66,19 @@ const tabs = [
 ];
 
 const projects = [
+  {
+    id: "Hybrid-RAG Search Engine",
+    title: "Hybrid-RAG Search Engine",
+    tagline: "AI-Powered Technical Documentation Search Engine",
+    media: hybrid,
+    icon: <Search size={22} className="text-blue-400" />,
+    badgeColor: "from-purple-500/20 to-cyan-500/20 border-cyan-400/30",
+    gradient: "from-slate-950 via-purple-950/40 to-cyan-950/30",
+    github: "https://github.com/Mystifying7/hybrid_rag_project",
+    tags: ["Generative AI", "Information Retrieval", "FastAPI", "Python"],
+    description:
+      "A security application built for evidence integrity, chain of custody logging, and digital artifact preservation.",
+  },
   {
     id: "kavacham",
     title: "Kavacham",
