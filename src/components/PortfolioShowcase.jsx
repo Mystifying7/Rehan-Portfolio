@@ -30,6 +30,7 @@ import {
   Download,
   FileText,
   Search,
+  ShieldCheck,
 } from "lucide-react";
 import { FaGithub } from "react-icons/fa";
 
@@ -40,6 +41,7 @@ import cineMindMedia from "../assets/projects/CineMindAI.mp4";
 import kavachamMedia from "../assets/projects/Kavacham.mp4";
 import virtualSteeringMedia from "../assets/projects/Virtual_Steering.mp4";
 import hybrid from "../assets/projects/Hybrid-RAG.mp4";
+import deepfakeMedia from "../assets/projects/deepfake.mp4";
 
 // Education Image imports
 import universityImg from "../assets/images/university.jpg";
@@ -92,6 +94,20 @@ const projects = [
     description:
       "A security application built for evidence integrity, chain of custody logging, and digital artifact preservation.",
   },
+  {
+    id: "deepfake-shield",
+    title: "FORENSIC_SHIELD",
+    tagline: "Multimodal Deepfake & Voice Clone Detection",
+    media: deepfakeMedia,
+    icon: <ShieldCheck size={22} className="text-emerald-400" />,
+    badgeColor: "from-emerald-500/20 to-cyan-500/20 border-emerald-400/30",
+    gradient: "from-slate-950 via-emerald-950/30 to-cyan-950/20",
+    github: "https://github.com/CY01-Hub/Paichan-Kaun",
+    tags: [
+      "Computer Vision","PyTorch","ONNX Runtime","Flask","React Three Fiber","Digital Forensics",],
+    description:
+      "Offline multimodal forensic detection engine that identifies video face-swaps and synthetic voice clones using INT8 CPU quantization, Grad-CAM heatmaps, and tamper-proof SHA-256 PDF evidence generation.",
+    },
   {
     id: "prop-engine",
     title: "PROP_ENGINE.ai",
