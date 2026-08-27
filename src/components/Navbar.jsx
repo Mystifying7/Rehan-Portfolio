@@ -182,8 +182,21 @@ function Navbar({ theme, toggleTheme }) {
           })}
         </div>
 
-        {/* Right: Social Icons, Theme Toggle & Contact CTA */}
+        {/* Right: Theme Toggle, Social Icons & Contact CTA */}
         <div className="flex items-center gap-2 shrink-0">
+          {/* Theme Toggle Button */}
+          <button
+            onClick={toggleTheme}
+            className={`flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full border transition hover:scale-105 ${
+              isDark
+                ? "border-cyan-400/30 bg-slate-900 text-cyan-400 hover:bg-cyan-400/15"
+                : "border-slate-300 bg-slate-100 text-amber-500 hover:bg-slate-200"
+            }`}
+            title={isDark ? "Switch to Light Theme" : "Switch to Dark Theme"}
+          >
+            {isDark ? <Sun size={15} /> : <Moon size={15} />}
+          </button>
+
           {/* GitHub Icon Link */}
           <a
             href="https://github.com/mystifying7"
@@ -213,19 +226,6 @@ function Navbar({ theme, toggleTheme }) {
           >
             <FaLinkedin size={14} />
           </a>
-
-          {/* Theme Toggle Button */}
-          <button
-            onClick={toggleTheme}
-            className={`flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full border transition hover:scale-105 ${
-              isDark
-                ? "border-cyan-400/30 bg-slate-900 text-cyan-400 hover:bg-cyan-400/15"
-                : "border-slate-300 bg-slate-100 text-amber-500 hover:bg-slate-200"
-            }`}
-            title={isDark ? "Switch to Light Theme" : "Switch to Dark Theme"}
-          >
-            {isDark ? <Sun size={15} /> : <Moon size={15} />}
-          </button>
 
           {/* Contact CTA Button */}
           <a
