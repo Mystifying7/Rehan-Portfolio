@@ -22,13 +22,13 @@ function Footer({ theme = "dark" }) {
               isDark ? "text-white" : "text-slate-900"
             }`}
           >
-            Md Rehan Alam • AI & ML Portfolio
+            Md Rehan Alam
           </span>
         </div>
 
         {/* Center Copyright */}
         <p className="text-xs font-medium">
-          © {new Date().getFullYear()} Md Rehan Alam. All rights reserved.
+          © {new Date().getFullYear()} Md Rehan Alam. All rights are reserved.
         </p>
 
         {/* Right Links */}

@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import SectionReveal from "./SectionReveal";
+import DocModal from "./DocModal";
 import {
   Code2,
   Award,
@@ -18,6 +19,8 @@ import {
   ExternalLink,
   CalendarDays,
   ChevronDown,
+  ChevronLeft,
+  ChevronRight,
   Sparkles,
   BookOpen,
   Users,
@@ -44,7 +47,7 @@ import hybrid from "../assets/projects/Hybrid-RAG.mp4";
 import deepfakeMedia from "../assets/projects/deepfake.mp4";
 
 // Education Image imports
-import universityImg from "../assets/images/university.jpg";
+import universityImg from "../assets/images/university.jpeg";
 import class12Img from "../assets/images/class-12.jpg";
 import class10Img from "../assets/images/class-10.jpg";
 
@@ -54,6 +57,7 @@ import dsaPDF from "../assets/certificates/Data_Structure_Algorithm.pdf";
 import javaProgPDF from "../assets/certificates/Java_programming.pdf";
 import resumePDF from "../assets/certificates/Rehan_Resume.pdf";
 import citadelPDF from "../assets/certificates/Citadel.pdf";
+import sihCertificateImg from "../assets/certificates/SIH.jpeg";
 
 /* ==========================================================================
    DATA DEFINITIONS
@@ -64,7 +68,7 @@ const tabs = [
   { id: "skills", label: "Tech Stack", icon: Layers },
   { id: "certificates", label: "Certificates", icon: Award },
   { id: "hackathons", label: "Hackathons", icon: Trophy },
-  { id: "education", label: "Education & Journey", icon: GraduationCap },
+  { id: "education", label: "Education", icon: GraduationCap },
 ];
 
 const projects = [
@@ -97,17 +101,25 @@ const projects = [
   {
     id: "deepfake-shield",
     title: "FORENSIC_SHIELD",
-    tagline: "Multimodal Deepfake & Voice Clone Detection",
+    tagline: "Multimodal Deepfake & Voice Clone Detection • SIH 1st Prize Winner",
     media: deepfakeMedia,
     icon: <ShieldCheck size={22} className="text-emerald-400" />,
-    badgeColor: "from-emerald-500/20 to-cyan-500/20 border-emerald-400/30",
-    gradient: "from-slate-950 via-emerald-950/30 to-cyan-950/20",
+    badgeColor: "from-amber-500/20 to-emerald-500/20 border-amber-400/30",
+    gradient: "from-slate-950 via-amber-950/20 to-emerald-950/20",
     github: "https://github.com/CY01-Hub/Paichan-Kaun",
     tags: [
-      "Computer Vision","PyTorch","ONNX Runtime","Flask","React Three Fiber","Digital Forensics",],
+      "SIH 1st Prize",
+      "Computer Vision",
+      "PyTorch",
+      "ONNX Runtime (INT8)",
+      "Librosa",
+      "Flask",
+      "React.js",
+      "Digital Forensics",
+    ],
     description:
-      "Offline multimodal forensic detection engine that identifies video face-swaps and synthetic voice clones using INT8 CPU quantization, Grad-CAM heatmaps, and tamper-proof SHA-256 PDF evidence generation.",
-    },
+      "1st Prize Winning offline multimodal forensic detection engine engineered for Smart India Hackathon (SIH 2026). Identifies frame-level video face-swaps, synthetic audio clones, and phoneme-viseme lip-sync misalignment using INT8 local CPU quantization, Mel-spectrograms, Grad-CAM visual heatmaps, and court-admissible SHA-256 PDF reports.",
+  },
   {
     id: "prop-engine",
     title: "PROP_ENGINE.ai",
@@ -164,36 +176,70 @@ const projects = [
 
 const skillCategories = [
   {
+    id: "ai-ml",
     title: "AI & Machine Learning",
-    icon: <Brain size={20} />,
+    tagline: "Computer Vision • Deep Learning • Predictive Models",
+    icon: <Brain size={22} />,
+    badgeColor: "bg-amber-400/20 text-amber-300 border-amber-400/40",
     skills: [
+      "PyTorch",
       "Scikit-Learn",
-      "Computer Vision (OpenCV, MediaPipe)",
-      "NLP Basics",
+      "Computer Vision (OpenCV)",
+      "MediaPipe Spatial",
+      "ONNX Runtime (INT8)",
+      "Librosa Audio Analysis",
+      "RetinaFace",
+      "NLP & TF-IDF",
       "Predictive Analytics",
-      "Model Evaluation",
     ],
   },
   {
+    id: "languages",
     title: "Programming Languages",
-    icon: <Code2 size={20} />,
-    skills: ["Python", "Java", "C", "JavaScript", "HTML5 & CSS3", "SQL"],
-  },
-  {
-    title: "Full-Stack Web Development",
-    icon: <Server size={20} />,
-    skills: ["React.js", "Flask", "FastAPI", "Tailwind CSS", "REST APIs", "Node.js"],
-  },
-  {
-    title: "Core CS & Engineering Tools",
-    icon: <Wrench size={20} />,
+    tagline: "Core Software Engineering & Algorithmic Syntax",
+    icon: <Code2 size={22} />,
+    badgeColor: "bg-emerald-400/20 text-emerald-300 border-emerald-400/40",
     skills: [
-      "Data Structures & Algorithms",
-      "Operating Systems",
-      "DBMS & SQL",
-      "Git & GitHub",
-      "Linux",
-      "WebSockets",
+      "Python 3.10+",
+      "Java (OOP & Collections)",
+      "C (Memory & Pointers)",
+      "JavaScript (ES6+)",
+      "TypeScript",
+      "SQL (PostgreSQL / MySQL)",
+      "HTML5 & CSS3",
+    ],
+  },
+  {
+    id: "web-dev",
+    title: "Full-Stack Development",
+    tagline: "High-Performance Modern Web Systems & APIs",
+    icon: <Server size={22} />,
+    badgeColor: "bg-purple-400/20 text-purple-300 border-purple-400/40",
+    skills: [
+      "React.js",
+      "FastAPI (Async Python)",
+      "Flask",
+      "Tailwind CSS",
+      "Vite & Node.js",
+      "WebSockets (Real-time)",
+      "RESTful APIs",
+      "React Router & Zod",
+    ],
+  },
+  {
+    id: "core-cs",
+    title: "Core CS & Engineering Tools",
+    tagline: "Algorithms • Forensics • Infrastructure",
+    icon: <Wrench size={22} />,
+    badgeColor: "bg-cyan-400/20 text-cyan-300 border-cyan-400/40",
+    skills: [
+      "Data Structures & Algorithms (400+)",
+      "Digital Forensics & Evidence Preserv.",
+      "Linux / Bash Scripting",
+      "Git & GitHub Version Control",
+      "Web Crypto API & SHA-256",
+      "IndexedDB Storage",
+      "Operating Systems & DBMS",
     ],
   },
 ];
@@ -233,17 +279,83 @@ const certifications = [
 
 const hackathons = [
   {
-    name: "Citadel 1.0",
-    level: "National",
-    status: "Participant",
-    project: "Kavacham",
+    id: "sih-2026",
+    name: "Smart India Hackathon 2026",
+    edition: "2nd Hackathon",
+    level: "National Level (SIH)",
+    status: "1st Prize Winner",
+    isWinner: true,
+    prize: "🥇 1st Prize Winner",
+    teamId: "SIH 65",
+    teamName: "Secret Society",
+    team: "Secret Society (Team ID: SIH 65)",
+    project: "FORENSIC_SHIELD",
+    problemStatement: "AI - Driven Deepfake & Voice Clone Forensic Detection Engine",
+    theme: "Cybersecurity & AI",
+    category: "Software",
+    date: "21st August 2026",
+    duration: "Internal SIH Round • 1st Place",
+    result: "1st Prize Winner • Zero Budget / 100% Self-Engineered",
+    certificate: sihCertificateImg,
+    fileType: "jpeg",
+    isImage: true,
+    issuer: "Ministry of Education, AICTE & Institution's Innovation Council (SVU Kolkata)",
     summary:
-      "Detect outbound personal-data exposure, inspect third-party APK risk, preserve encrypted evidence, prepare erasure requests, and organise a reviewable escalation timeline.",
-    date: "July 2026",
+      "Achieved 1st Prize at Smart India Hackathon (SIH 2026) for engineering an offline multimodal deepfake & synthetic voice clone forensic engine with zero budget. Detects frame-level video face-swaps, synthetic audio clones, and phoneme-viseme lip-sync misalignment with INT8 local CPU quantization, Grad-CAM heatmaps, and tamper-proof SHA-256 encrypted court-admissible forensic PDF reports.",
+    highlights: [
+      "🏆 1st Prize Winner: Awarded 1st place in the Cybersecurity & AI software category with zero budget & complete self-engineered execution.",
+      "🔬 Visual Forensics & Lip-Sync: Frame-by-frame blinking anomalies, facial jitter analysis, and Phoneme-Viseme cross-modal alignment checking mouth movements against spoken audio.",
+      "🎙️ Audio Verification: Mel-Spectrogram and pitch fluctuation scanning to detect synthetic AI voice clones.",
+      "⚡ 100% Offline INT8 Quantization: Runs locally on standard 8GB RAM CPU laptops with 0 cloud GPU dependency, guaranteeing 100% data privacy and 0 latency overhead.",
+      "📑 Court-Admissible Output: Generates tamper-proof forensic PDF evidence documents with visual Grad-CAM heatmaps and cryptographic SHA-256 hashes.",
+      "💻 Dual Control Interfaces: Interactive React.js Web UI for visual inspection + Python argparse Terminal CLI tool for batch scanning confiscated drives."
+    ],
+    stack: [
+      "Python 3.10+",
+      "PyTorch",
+      "ONNX Runtime (INT8)",
+      "OpenCV",
+      "RetinaFace",
+      "Librosa",
+      "Flask",
+      "Gunicorn",
+      "React.js",
+      "Tailwind CSS",
+      "ReportLab",
+      "SHA-256 Hashes",
+      "argparse CLI",
+    ],
+    github: "https://github.com/CY01-Hub/Paichan-Kaun",
+  },
+  {
+    id: "citadel-1",
+    name: "Citadel 1.0",
+    edition: "1st Hackathon",
+    level: "National Level",
+    status: "Participant",
+    isWinner: false,
+    prize: "National Security Finalist",
+    teamId: "Citadel Team",
+    teamName: "Team Kavacham",
     team: "Team of 4",
-    duration: "30 Hours",
+    project: "Kavacham",
+    problemStatement: "Outbound Personal Data Exposure & APK Risk Inspection",
+    theme: "Cyber Security & Privacy",
+    category: "Software",
+    summary:
+      "Engineered an automated digital defense system to detect outbound personal-data exposure, inspect third-party APK risk, preserve encrypted forensic evidence, prepare data erasure requests, and organise reviewable escalation timelines.",
+    date: "July 2026",
+    duration: "30 Hours Hackathon",
     result: "Security Prototype",
-    pdf: citadelPDF,
+    certificate: citadelPDF,
+    fileType: "pdf",
+    isImage: false,
+    issuer: "National Cyber Security Hackathon • Project Kavacham",
+    highlights: [
+      "🛡️ Privacy Preservation: Outbound personal-data exposure detection and third-party APK risk analysis.",
+      "🔐 Encrypted Evidence: Tamper-proof evidence preservation utilizing Web Crypto API and IndexedDB.",
+      "⏱️ Rapid 30-Hour Build: Delivered high-integrity security prototype within tight hackathon timeline."
+    ],
     stack: [
       "React",
       "TypeScript",
@@ -360,11 +472,10 @@ function ProjectsView({ isDark, onSelectProject }) {
         <motion.div
           key={project.id}
           whileHover={{ y: -6 }}
-          className={`group relative flex flex-col justify-between overflow-hidden rounded-2xl border p-5 transition-all duration-300 ${
-            isDark
-              ? "border-white/10 bg-slate-950/70 hover:border-cyan-400/50 hover:shadow-2xl hover:shadow-cyan-500/15"
-              : "border-slate-200 bg-white hover:border-cyan-500/50 hover:shadow-xl hover:shadow-slate-300/40"
-          }`}
+          className={`group relative flex flex-col justify-between overflow-hidden rounded-2xl border p-5 transition-all duration-300 ${isDark
+            ? "border-white/10 bg-slate-950/70 hover:border-cyan-400/50 hover:shadow-2xl hover:shadow-cyan-500/15"
+            : "border-slate-200 bg-white hover:border-cyan-500/50 hover:shadow-xl hover:shadow-slate-300/40"
+            }`}
         >
           <div>
             {/* Project Video / Media Preview */}
@@ -378,7 +489,7 @@ function ProjectsView({ isDark, onSelectProject }) {
                 loop
                 playsInline
                 className="h-full w-full object-cover transition-transform duration-500 group-hover/media:scale-105"
-                onMouseEnter={(e) => e.currentTarget.play().catch(() => {})}
+                onMouseEnter={(e) => e.currentTarget.play().catch(() => { })}
                 onMouseLeave={(e) => e.currentTarget.pause()}
               />
               <div className="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 backdrop-blur-[2px] transition-opacity duration-300 group-hover/media:opacity-100">
@@ -390,16 +501,15 @@ function ProjectsView({ isDark, onSelectProject }) {
             </div>
 
             {/* Header with Icon and Title */}
-            <div className="flex items-start justify-between gap-3">
+            <div className="flex items-center justify-between gap-3">
               <div className="flex items-center gap-2.5">
                 <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-cyan-400/10 text-cyan-400">
                   {project.icon}
                 </div>
                 <div>
                   <h3
-                    className={`text-lg font-black tracking-tight ${
-                      isDark ? "text-white group-hover:text-cyan-300" : "text-slate-900 group-hover:text-cyan-700"
-                    }`}
+                    className={`text-lg font-black tracking-tight ${isDark ? "text-white group-hover:text-cyan-300" : "text-slate-900 group-hover:text-cyan-700"
+                      }`}
                   >
                     {project.title}
                   </h3>
@@ -412,9 +522,8 @@ function ProjectsView({ isDark, onSelectProject }) {
 
             {/* Description */}
             <p
-              className={`mt-3 text-xs leading-relaxed line-clamp-2 ${
-                isDark ? "text-slate-300" : "text-slate-600"
-              }`}
+              className={`mt-3 text-xs leading-relaxed line-clamp-2 ${isDark ? "text-slate-300" : "text-slate-600"
+                }`}
             >
               {project.description}
             </p>
@@ -426,11 +535,10 @@ function ProjectsView({ isDark, onSelectProject }) {
               {project.tags.slice(0, 3).map((tag) => (
                 <span
                   key={tag}
-                  className={`rounded-md px-2 py-0.5 text-[10px] font-semibold ${
-                    isDark
-                      ? "bg-slate-900 text-cyan-300 border border-cyan-400/20"
-                      : "bg-cyan-50 text-cyan-700 border border-cyan-200"
-                  }`}
+                  className={`rounded-md px-2 py-0.5 text-[10px] font-semibold ${isDark
+                    ? "bg-slate-900 text-cyan-300 border border-cyan-400/20"
+                    : "bg-cyan-50 text-cyan-700 border border-cyan-200"
+                    }`}
                 >
                   {tag}
                 </span>
@@ -442,11 +550,10 @@ function ProjectsView({ isDark, onSelectProject }) {
                 href={project.github}
                 target="_blank"
                 rel="noreferrer"
-                className={`flex h-8 w-8 items-center justify-center rounded-lg border transition ${
-                  isDark
-                    ? "border-white/10 bg-slate-900 text-slate-300 hover:border-cyan-400 hover:text-cyan-300"
-                    : "border-slate-300 bg-slate-100 text-slate-700 hover:border-cyan-500 hover:text-cyan-700"
-                }`}
+                className={`flex h-8 w-8 items-center justify-center rounded-lg border transition ${isDark
+                  ? "border-white/10 bg-slate-900 text-slate-300 hover:border-cyan-400 hover:text-cyan-300"
+                  : "border-slate-300 bg-slate-100 text-slate-700 hover:border-cyan-500 hover:text-cyan-700"
+                  }`}
                 title="View on GitHub"
               >
                 <FaGithub size={15} />
@@ -459,301 +566,767 @@ function ProjectsView({ isDark, onSelectProject }) {
   );
 }
 
-/* 2. Skills / Tech Stack View */
+/* 2. Skills / Tech Stack View with Ultra-Smooth 3D Semi-Circle Arc Carousel */
 function SkillsView({ isDark }) {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const totalCards = skillCategories.length;
+  const wheelLockRef = useRef(false);
+
+  const handlePrev = () => {
+    setActiveIndex((prev) => (prev === 0 ? totalCards - 1 : prev - 1));
+  };
+
+  const handleNext = () => {
+    setActiveIndex((prev) => (prev === totalCards - 1 ? 0 : prev + 1));
+  };
+
+  // Keyboard navigation support
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === "ArrowLeft") handlePrev();
+      if (e.key === "ArrowRight") handleNext();
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [totalCards]);
+
+  // Smooth Drag & Swipe Gesture
+  const handleDragEnd = (event, info) => {
+    if (info.offset.x < -35 || info.velocity.x < -350) {
+      handleNext();
+    } else if (info.offset.x > 35 || info.velocity.x > 350) {
+      handlePrev();
+    }
+  };
+
+  // Smooth Mouse Wheel / Horizontal Trackpad Scroll
+  const handleWheel = (e) => {
+    if (wheelLockRef.current) return;
+    if (Math.abs(e.deltaX) > 25 || (e.shiftKey && Math.abs(e.deltaY) > 25)) {
+      wheelLockRef.current = true;
+      if (e.deltaX > 0 || (e.shiftKey && e.deltaY > 0)) {
+        handleNext();
+      } else {
+        handlePrev();
+      }
+      setTimeout(() => {
+        wheelLockRef.current = false;
+      }, 350);
+    }
+  };
+
   return (
-    <div className="grid gap-5 md:grid-cols-2">
-      {skillCategories.map((category) => (
-        <motion.div
-          key={category.title}
-          whileHover={{ y: -4 }}
-          className={`rounded-2xl border p-5 backdrop-blur-xl transition duration-300 ${
-            isDark
-              ? "border-white/10 bg-slate-950/70 hover:border-cyan-400/40 hover:shadow-xl hover:shadow-cyan-500/10"
-              : "border-slate-200 bg-white hover:border-cyan-500/40 hover:shadow-lg shadow-slate-200/50"
-          }`}
+    <div
+      onWheel={handleWheel}
+      className="relative py-2 select-none"
+    >
+      {/* 3D Semi-Circle Arc Viewport for Vertical Portrait Cards */}
+      <div
+        className="relative flex items-center justify-center min-h-[500px] sm:min-h-[520px] overflow-hidden px-2 sm:px-4"
+        style={{ perspective: "1200px" }}
+      >
+        <div className="relative w-full max-w-4xl h-[470px] sm:h-[490px] flex items-center justify-center">
+          {skillCategories.map((category, index) => {
+            // Calculate relative offset around the carousel
+            let offset = index - activeIndex;
+            if (offset < -Math.floor(totalCards / 2)) offset += totalCards;
+            if (offset > Math.floor((totalCards - 1) / 2)) offset -= totalCards;
+
+            const isCenter = offset === 0;
+            const isLeft = offset === -1;
+            const isRight = offset === 1;
+            const isVisible = Math.abs(offset) <= 1;
+
+            // 3D Semi-Circle / Arc coordinate transform parameters for portrait cards
+            let xOffset = "0%";
+            let yOffset = "0px";
+            let rotateY = 0;
+            let rotateZ = 0;
+            let scale = 1;
+            let zIndex = 30;
+            let opacity = 1;
+
+            if (isCenter) {
+              xOffset = "0%";
+              yOffset = "0px";
+              rotateY = 0;
+              rotateZ = 0;
+              scale = 1.03;
+              zIndex = 30;
+              opacity = 1;
+            } else if (isLeft) {
+              xOffset = "-74%";
+              yOffset = "22px";
+              rotateY = 32;
+              rotateZ = -2;
+              scale = 0.86;
+              zIndex = 20;
+              opacity = 0.52;
+            } else if (isRight) {
+              xOffset = "74%";
+              yOffset = "22px";
+              rotateY = -32;
+              rotateZ = 2;
+              scale = 0.86;
+              zIndex = 20;
+              opacity = 0.52;
+            } else {
+              xOffset = offset > 0 ? "130%" : "-130%";
+              yOffset = "45px";
+              rotateY = offset > 0 ? -50 : 50;
+              scale = 0.65;
+              zIndex = 10;
+              opacity = 0;
+            }
+
+            return (
+              <motion.div
+                key={category.id || category.title}
+                drag={isCenter ? "x" : false}
+                dragConstraints={{ left: 0, right: 0 }}
+                dragElastic={0.18}
+                onDragEnd={handleDragEnd}
+                animate={{
+                  x: xOffset,
+                  y: yOffset,
+                  rotateY: rotateY,
+                  rotateZ: rotateZ,
+                  scale: scale,
+                  opacity: opacity,
+                  zIndex: zIndex,
+                }}
+                transition={{
+                  duration: 0.42,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+                onClick={() => {
+                  if (!isCenter) setActiveIndex(index);
+                }}
+                className={`absolute w-[310px] sm:w-[350px] md:w-[370px] min-h-[450px] sm:min-h-[470px] p-5 sm:p-6 rounded-3xl border flex flex-col justify-between transition-colors duration-300 ${!isCenter ? "cursor-pointer hover:opacity-85" : "cursor-grab active:cursor-grabbing"
+                  } ${isCenter
+                    ? isDark
+                      ? "border-cyan-400/70 bg-gradient-to-b from-slate-950 via-slate-900/98 to-slate-950 shadow-[0_0_40px_rgba(34,211,238,0.25)] ring-1 ring-cyan-400/30"
+                      : "border-cyan-500/70 bg-gradient-to-b from-white via-cyan-50/40 to-white shadow-[0_15px_40px_rgba(6,182,212,0.22)] ring-1 ring-cyan-500/30"
+                    : isDark
+                      ? "border-white/10 bg-slate-950 shadow-2xl"
+                      : "border-slate-300 bg-white shadow-xl"
+                  }`}
+                style={{
+                  transformStyle: "preserve-3d",
+                  willChange: "transform, opacity",
+                  backfaceVisibility: "hidden",
+                  pointerEvents: isVisible ? "auto" : "none",
+                }}
+              >
+                {/* Visual Arc Guidance Badges */}
+                {isLeft && (
+                  <div className="absolute -top-3.5 left-6 rounded-full bg-cyan-400/20 border border-cyan-400/40 px-3 py-0.5 text-[10px] font-black text-cyan-300 backdrop-blur-md">
+                    ← Previous
+                  </div>
+                )}
+                {isRight && (
+                  <div className="absolute -top-3.5 right-6 rounded-full bg-cyan-400/20 border border-cyan-400/40 px-3 py-0.5 text-[10px] font-black text-cyan-300 backdrop-blur-md">
+                    Upcoming →
+                  </div>
+                )}
+
+                {/* Vertical Portrait Card Top Header */}
+                <div>
+                  {/* Top Bar: Card Number & Specialization Badge */}
+                  <div className="flex items-center justify-between pb-3 border-b border-white/10">
+                    <span
+                      className={`rounded-lg px-2 py-0.5 text-[10px] font-black tracking-wider ${isDark ? "bg-slate-900 text-slate-400 border border-white/5" : "bg-slate-100 text-slate-600"
+                        }`}
+                    >
+                      CARD 0{index + 1}/0{totalCards}
+                    </span>
+                    {category.badge && (
+                      <span
+                        className={`rounded-full border px-2.5 py-0.5 text-[10px] font-black ${category.badgeColor || "bg-cyan-400/20 text-cyan-300 border-cyan-400/40"
+                          }`}
+                      >
+                        {category.badge}
+                      </span>
+                    )}
+                  </div>
+
+                  {/* Icon & Category Title in Vertical Alignment */}
+                  <div className="flex flex-col items-center text-center mt-4">
+                    <div
+                      className={`flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border transition-transform duration-300 ${isCenter
+                          ? "bg-cyan-400/15 text-cyan-300 border-cyan-400/40 shadow-lg shadow-cyan-400/20 scale-105"
+                          : "bg-slate-800 text-slate-400 border-white/10"
+                        }`}
+                    >
+                      {category.icon}
+                    </div>
+                    <h3
+                      className={`text-lg sm:text-xl font-black mt-3 leading-tight ${isDark ? "text-white" : "text-slate-900"
+                        }`}
+                    >
+                      {category.title}
+                    </h3>
+                    <p className="text-xs font-semibold text-cyan-400 mt-1">
+                      {category.tagline || `${category.skills.length} Mastered Technologies`}
+                    </p>
+                  </div>
+
+                  <div className="my-3.5 border-t border-white/10" />
+
+                  {/* Vertical Skills Chips Container */}
+                  <div className="flex flex-wrap gap-2 justify-center max-h-[220px] overflow-y-auto pr-1">
+                    {category.skills.map((skill) => (
+                      <span
+                        key={skill}
+                        className={`rounded-xl border px-3 py-1.5 text-xs font-bold transition-all duration-200 ${isCenter
+                            ? isDark
+                              ? "border-cyan-400/30 bg-cyan-400/10 text-cyan-200 hover:border-cyan-400 hover:bg-cyan-400/25 shadow-sm"
+                              : "border-cyan-600/30 bg-cyan-50 text-cyan-900 hover:border-cyan-600 hover:bg-cyan-100 shadow-sm"
+                            : isDark
+                              ? "border-white/10 bg-slate-900/80 text-slate-300"
+                              : "border-slate-200 bg-slate-100 text-slate-700"
+                          }`}
+                      >
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Vertical Portrait Card Bottom Status Footer */}
+                <div className="mt-4 pt-3 border-t border-white/10 flex items-center justify-between text-xs">
+                  <span className="flex items-center gap-1 font-semibold text-slate-400 text-[11px]">
+                    <CheckCircle2 size={13} className="text-emerald-400" />
+                    <span>Verified Stack</span>
+                  </span>
+                  <span
+                    className={`font-black uppercase tracking-wider text-[10px] ${isCenter ? "text-cyan-400 animate-pulse" : "text-slate-500"
+                      }`}
+                  >
+                    {isCenter ? "● Active Focus" : "Click to View"}
+                  </span>
+                </div>
+              </motion.div>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Navigation Controls Row (Previous Button, Dot Indicators, Next Button) */}
+      <div className="mt-6 flex items-center justify-center gap-6">
+        <button
+          onClick={handlePrev}
+          className={`flex h-11 w-11 items-center justify-center rounded-2xl border transition-all duration-200 cursor-pointer ${isDark
+              ? "border-white/15 bg-slate-900 text-slate-300 hover:border-cyan-400 hover:text-cyan-300 hover:scale-110 shadow-lg shadow-black/40"
+              : "border-slate-300 bg-white text-slate-700 hover:border-cyan-500 hover:text-cyan-600 hover:scale-110 shadow-md"
+            }`}
+          title="Previous Skill (Left Arrow)"
         >
-          <div className="flex items-center gap-3 mb-4">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-cyan-400/10 text-cyan-400">
-              {category.icon}
-            </div>
-            <h3
-              className={`text-base font-bold ${
-                isDark ? "text-white" : "text-slate-900"
+          <ChevronLeft size={20} />
+        </button>
+
+        {/* Indicator Dots */}
+        <div className="flex items-center gap-2">
+          {skillCategories.map((cat, i) => (
+            <button
+              key={i}
+              onClick={() => setActiveIndex(i)}
+              className={`h-2.5 rounded-full transition-all duration-300 cursor-pointer ${i === activeIndex
+                  ? "w-8 bg-gradient-to-r from-cyan-400 to-sky-500 shadow-md shadow-cyan-400/40"
+                  : "w-2.5 bg-slate-600 hover:bg-slate-400"
+                }`}
+              title={`Jump to ${cat.title}`}
+            />
+          ))}
+        </div>
+
+        <button
+          onClick={handleNext}
+          className={`flex h-11 w-11 items-center justify-center rounded-2xl border transition-all duration-200 cursor-pointer ${isDark
+              ? "border-white/15 bg-slate-900 text-slate-300 hover:border-cyan-400 hover:text-cyan-300 hover:scale-110 shadow-lg shadow-black/40"
+              : "border-slate-300 bg-white text-slate-700 hover:border-cyan-500 hover:text-cyan-600 hover:scale-110 shadow-md"
+            }`}
+          title="Next Skill (Right Arrow)"
+        >
+          <ChevronRight size={20} />
+        </button>
+      </div>
+
+      <p className="mt-2 text-center text-[11px] font-medium text-slate-400">
+        Drag/Swipe, click side card, or use <kbd className="px-1.5 py-0.5 rounded bg-slate-800 border border-white/10 text-[10px]">←</kbd> <kbd className="px-1.5 py-0.5 rounded bg-slate-800 border border-white/10 text-[10px]">→</kbd> arrow keys to navigate
+      </p>
+    </div>
+  );
+}
+
+/* Interactive 3D Holographic Certificate Card */
+function CertificateCard({ cert, isDark, onSelectCert, index }) {
+  const cardRef = useRef(null);
+  const [rotateX, setRotateX] = useState(0);
+  const [rotateY, setRotateY] = useState(0);
+  const [glarePos, setGlarePos] = useState({ x: 50, y: 50, opacity: 0 });
+
+  const handleMouseMove = (e) => {
+    if (!cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+
+    const rX = ((y - centerY) / centerY) * -9;
+    const rY = ((x - centerX) / centerX) * 9;
+
+    setRotateX(rX);
+    setRotateY(rY);
+    setGlarePos({
+      x: (x / rect.width) * 100,
+      y: (y / rect.height) * 100,
+      opacity: 0.18,
+    });
+  };
+
+  const handleMouseLeave = () => {
+    setRotateX(0);
+    setRotateY(0);
+    setGlarePos((prev) => ({ ...prev, opacity: 0 }));
+  };
+
+  const isGold = cert.level === "GOLD";
+  const isSilver = cert.level === "SILVER";
+
+  const accentGlow = isGold
+    ? "from-amber-500/20 via-yellow-400/10 to-amber-500/5 border-amber-400/40 shadow-amber-500/10"
+    : isSilver
+      ? "from-slate-200/20 via-sky-300/10 to-slate-400/5 border-slate-300/40 shadow-sky-500/10"
+      : "from-cyan-500/20 via-sky-400/10 to-cyan-500/5 border-cyan-400/40 shadow-cyan-500/10";
+
+  const badgeStyle = isGold
+    ? isDark
+      ? "bg-gradient-to-r from-amber-400/20 to-yellow-500/20 text-amber-300 border-amber-400/50 shadow-sm shadow-amber-400/20"
+      : "bg-amber-100 text-amber-900 border-amber-400 font-black shadow-sm"
+    : isSilver
+      ? isDark
+        ? "bg-gradient-to-r from-slate-200/20 to-sky-300/20 text-slate-100 border-slate-300/50 shadow-sm shadow-slate-300/20"
+        : "bg-sky-100 text-sky-900 border-sky-400 font-black shadow-sm"
+      : isDark
+        ? "bg-gradient-to-r from-cyan-400/20 to-teal-400/20 text-cyan-300 border-cyan-400/50 shadow-sm shadow-cyan-400/20"
+        : "bg-cyan-100 text-cyan-900 border-cyan-400 font-black shadow-sm";
+
+  return (
+    <motion.div
+      ref={cardRef}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      initial={{ opacity: 0, y: 25 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: index * 0.12 }}
+      className={`relative group rounded-3xl border p-6 flex flex-col justify-between overflow-hidden transition-all duration-200 select-none ${isDark
+          ? "bg-gradient-to-b from-slate-950/95 via-slate-900/90 to-slate-950/95"
+          : "bg-gradient-to-b from-white via-slate-50/80 to-white"
+        } ${accentGlow} hover:shadow-2xl`}
+      style={{
+        transform: `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1, 1, 1)`,
+        transformStyle: "preserve-3d",
+        willChange: "transform",
+      }}
+    >
+      {/* Holographic Light Glare / Foil Overlay */}
+      <div
+        className="pointer-events-none absolute inset-0 rounded-3xl transition-opacity duration-300"
+        style={{
+          background: `radial-gradient(circle 280px at ${glarePos.x}% ${glarePos.y}%, rgba(255, 255, 255, ${glarePos.opacity}), transparent 70%)`,
+        }}
+      />
+
+      {/* Decorative Subtle Background Watermark Stamp (Visible across Gold, Silver/DSA, and Certified) */}
+      <div className={`pointer-events-none absolute -right-6 -bottom-6 group-hover:scale-110 transition-all duration-500 ${
+        isDark ? "opacity-5 group-hover:opacity-10" : "opacity-15 group-hover:opacity-25"
+      }`}>
+        <Award
+          size={180}
+          className={
+            isGold
+              ? isDark ? "text-amber-400" : "text-amber-500"
+              : isSilver
+              ? isDark ? "text-slate-300" : "text-sky-600"
+              : isDark ? "text-cyan-400" : "text-cyan-600"
+          }
+        />
+      </div>
+
+      <div>
+        {/* Card Header: Level Medal Badge & Duration */}
+        <div className={`flex items-center justify-between gap-2 pb-3.5 border-b ${
+          isDark ? "border-white/10" : "border-slate-200"
+        }`}>
+          <span className={`flex items-center gap-1.5 rounded-full border px-3 py-1 text-[11px] font-black uppercase tracking-wider ${badgeStyle}`}>
+            <Sparkles size={12} className={isGold ? "text-amber-400 animate-pulse" : isSilver ? "text-sky-500" : "text-cyan-500"} />
+            <span>{isGold ? "🥇 ELITE GOLD" : isSilver ? "🥈 ELITE + SILVER" : "🎖️ ELITE CERTIFIED"}</span>
+          </span>
+          <span className={`text-[11px] font-bold tracking-wide ${isDark ? "text-slate-400" : "text-slate-600"}`}>
+            {cert.duration}
+          </span>
+        </div>
+
+        {/* Certificate Title & IIT Issuer */}
+        <div className="mt-4">
+          <h4 className={`text-xl font-black leading-snug transition-colors duration-200 ${
+            isDark ? "text-white group-hover:text-cyan-300" : "text-slate-900 group-hover:text-cyan-700"
+          }`}>
+            {cert.title}
+          </h4>
+          <p className={`text-xs font-bold mt-1 flex items-center gap-1.5 ${
+            isDark ? "text-cyan-400" : "text-cyan-700"
+          }`}>
+            <GraduationCap size={14} />
+            <span>{cert.issuer}</span>
+          </p>
+        </div>
+
+        {/* Verified Elite Achievement Box */}
+        <div className={`mt-3.5 flex items-center gap-2 rounded-xl p-2.5 border text-xs font-semibold ${
+          isGold
+            ? isDark ? "bg-amber-400/10 border-amber-400/30 text-amber-300" : "bg-amber-50 border-amber-300 text-amber-900 font-bold"
+            : isSilver
+            ? isDark ? "bg-sky-400/10 border-sky-400/30 text-sky-200" : "bg-sky-50 border-sky-300 text-sky-900 font-bold"
+            : isDark ? "bg-cyan-400/10 border-cyan-400/30 text-cyan-300" : "bg-cyan-50 border-cyan-300 text-cyan-900 font-bold"
+        }`}>
+          <ShieldCheck size={16} className="shrink-0" />
+          <span>{cert.achievement}</span>
+        </div>
+
+        {/* Skills Tag Pills */}
+        <div className="mt-4 flex flex-wrap gap-1.5">
+          {cert.skills.map((s) => (
+            <span
+              key={s}
+              className={`rounded-lg px-2.5 py-1 text-[11px] font-semibold transition-all duration-200 ${
+                isDark
+                  ? "bg-slate-900/80 text-slate-300 border border-white/10 group-hover:border-cyan-400/30"
+                  : "bg-slate-100 text-slate-800 border border-slate-300 font-medium"
               }`}
             >
-              {category.title}
-            </h3>
-          </div>
+              {s}
+            </span>
+          ))}
+        </div>
+      </div>
 
-          <div className="flex flex-wrap gap-2">
-            {category.skills.map((skill) => (
-              <span
-                key={skill}
-                className={`rounded-lg border px-3 py-1.5 text-xs font-semibold backdrop-blur-md transition-all duration-200 hover:scale-105 ${
-                  isDark
-                    ? "border-cyan-400/25 bg-cyan-400/10 text-cyan-300 hover:border-cyan-400/60 hover:bg-cyan-400/20"
-                    : "border-cyan-600/20 bg-cyan-50 text-cyan-800 hover:border-cyan-600/40 hover:bg-cyan-100"
-                }`}
-              >
-                {skill}
-              </span>
-            ))}
-          </div>
-        </motion.div>
-      ))}
-    </div>
+      {/* Action Buttons: Preview & Direct PDF Download */}
+      <div className={`mt-6 pt-4 border-t flex items-center gap-2 ${
+        isDark ? "border-white/10" : "border-slate-200"
+      }`}>
+        <button
+          onClick={() => onSelectCert && onSelectCert(cert)}
+          className={`flex-1 flex items-center justify-center gap-2 rounded-xl py-2.5 text-xs font-black transition-all duration-200 cursor-pointer ${
+            isDark
+              ? "bg-gradient-to-r from-cyan-400/15 to-sky-500/15 border border-cyan-400/40 text-cyan-300 hover:from-cyan-400 hover:to-sky-500 hover:text-slate-950 hover:shadow-lg hover:shadow-cyan-400/25 hover:scale-[1.02]"
+              : "bg-cyan-600 border border-cyan-600 text-white hover:bg-cyan-700 hover:shadow-md hover:scale-[1.02]"
+          }`}
+        >
+          <Eye size={15} />
+          <span>Preview Credential</span>
+        </button>
+        <a
+          href={cert.pdf}
+          download={`${cert.title.replace(/\s+/g, "_")}.pdf`}
+          className={`flex h-10 w-10 items-center justify-center rounded-xl border transition-all duration-200 hover:scale-105 cursor-pointer ${
+            isDark
+              ? "border-white/15 bg-slate-900 text-slate-300 hover:border-cyan-400 hover:text-cyan-300 shadow-md"
+              : "border-slate-300 bg-white text-slate-700 hover:border-cyan-600 hover:text-cyan-700 shadow-sm"
+          }`}
+          title="Direct Download Certificate PDF"
+        >
+          <Download size={15} />
+        </a>
+      </div>
+    </motion.div>
   );
 }
 
 /* 3. Certificates View */
 function CertificatesView({ isDark, onSelectCert }) {
-  const [filter, setFilter] = useState("ALL");
-
-  const filteredCerts =
-    filter === "ALL"
-      ? certifications
-      : certifications.filter((c) => c.level === filter);
-
   return (
-    <div className="space-y-6">
-      {/* Filter Tabs */}
-      <div className="flex flex-wrap items-center justify-center gap-2">
-        {["ALL", "GOLD", "SILVER", "CERTIFIED"].map((lvl) => (
-          <button
-            key={lvl}
-            onClick={() => setFilter(lvl)}
-            className={`rounded-xl px-4 py-1.5 text-xs font-bold transition ${
-              filter === lvl
-                ? "bg-cyan-400 text-slate-950 shadow-md shadow-cyan-400/30"
-                : isDark
-                ? "border border-white/10 bg-slate-900 text-slate-400 hover:text-white"
-                : "border border-slate-300 bg-white text-slate-600 hover:text-slate-900"
-            }`}
-          >
-            {lvl}
-          </button>
-        ))}
-      </div>
-
-      {/* Certificates Grid */}
-      <div className="grid gap-5 md:grid-cols-3">
-        {filteredCerts.map((cert) => (
-          <motion.div
+    <div>
+      <div className="grid gap-6 md:grid-cols-3">
+        {certifications.map((cert, index) => (
+          <CertificateCard
             key={cert.id}
-            whileHover={{ y: -4 }}
-            className={`flex flex-col justify-between rounded-2xl border p-5 backdrop-blur-xl transition duration-300 ${
-              isDark
-                ? "border-white/10 bg-slate-950/70 hover:border-cyan-400/40 hover:shadow-xl hover:shadow-cyan-500/10"
-                : "border-slate-200 bg-white hover:border-cyan-500/40 hover:shadow-lg"
-            }`}
-          >
-            <div>
-              {/* Badge & Level */}
-              <div className="flex items-center justify-between gap-2">
-                <span
-                  className={`rounded-full px-2.5 py-0.5 text-[10px] font-black uppercase tracking-wider ${
-                    cert.level === "GOLD"
-                      ? "bg-amber-400/20 text-amber-300 border border-amber-400/40"
-                      : cert.level === "SILVER"
-                      ? "bg-slate-300/20 text-slate-200 border border-slate-300/40"
-                      : "bg-cyan-400/20 text-cyan-300 border border-cyan-400/40"
-                  }`}
-                >
-                  {cert.level}
-                </span>
-                <span className="text-[11px] font-semibold text-slate-400">
-                  {cert.duration}
-                </span>
-              </div>
-
-              <h4
-                className={`mt-3 text-lg font-black ${
-                  isDark ? "text-white" : "text-slate-900"
-                }`}
-              >
-                {cert.title}
-              </h4>
-              <p className="text-xs font-semibold text-cyan-400">{cert.issuer}</p>
-
-              {/* Achievement Note */}
-              <div className="mt-3 flex items-center gap-1.5 text-xs text-amber-300 font-medium">
-                <Sparkles size={13} className="text-amber-400" />
-                <span>{cert.achievement}</span>
-              </div>
-
-              {/* Skills */}
-              <div className="mt-4 flex flex-wrap gap-1.5">
-                {cert.skills.map((s) => (
-                  <span
-                    key={s}
-                    className={`rounded-md px-2 py-0.5 text-[10px] font-medium ${
-                      isDark
-                        ? "bg-slate-900 text-slate-300 border border-white/10"
-                        : "bg-slate-100 text-slate-700"
-                    }`}
-                  >
-                    {s}
-                  </span>
-                ))}
-              </div>
-            </div>
-
-            {/* View Certificate & Direct Download Actions */}
-            <div className="mt-5 pt-3 border-t border-white/10 flex items-center gap-2">
-              <button
-                onClick={() => onSelectCert && onSelectCert(cert)}
-                className="flex-1 flex items-center justify-center gap-2 rounded-xl bg-cyan-400/10 border border-cyan-400/30 py-2.5 text-xs font-bold text-cyan-300 transition hover:bg-cyan-400 hover:text-slate-950 hover:shadow-md cursor-pointer"
-              >
-                <Eye size={14} />
-                <span>Preview Certificate</span>
-              </button>
-              <a
-                href={cert.pdf}
-                download={`${cert.title.replace(/\s+/g, "_")}.pdf`}
-                className={`flex h-9 w-9 items-center justify-center rounded-xl border transition ${
-                  isDark
-                    ? "border-white/10 bg-slate-900 text-slate-300 hover:border-cyan-400 hover:text-cyan-300"
-                    : "border-slate-300 bg-slate-100 text-slate-700 hover:border-cyan-500 hover:text-cyan-700"
-                }`}
-                title="Direct Download PDF"
-              >
-                <Download size={14} />
-              </a>
-            </div>
-          </motion.div>
+            cert={cert}
+            index={index}
+            isDark={isDark}
+            onSelectCert={onSelectCert}
+          />
         ))}
       </div>
     </div>
   );
 }
 
-/* 4. Hackathons View */
+/* 4. Hackathons View with Compact Overlapping Sticky Stack Animation */
 function HackathonsView({ isDark, onSelectHackathon }) {
   return (
-    <div className="space-y-6">
-      {hackathons.map((hack) => (
-        <motion.div
-          key={hack.name}
-          whileHover={{ y: -4 }}
-          className={`rounded-2xl border p-6 backdrop-blur-xl transition duration-300 ${
-            isDark
-              ? "border-white/10 bg-slate-950/70 hover:border-cyan-400/40"
-              : "border-slate-200 bg-white hover:border-cyan-500/40"
-          }`}
-        >
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/10 pb-4">
-            <div className="flex items-center gap-3">
-              <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-purple-500/15 text-purple-400 border border-purple-400/30">
-                <Trophy size={22} />
-              </div>
-              <div>
-                <div className="flex items-center gap-2">
-                  <h3
-                    className={`text-xl font-black ${
-                      isDark ? "text-white" : "text-slate-900"
+    <div className="relative">
+      {/* Top Stack Guidance Header */}
+      <div className="mb-4 flex flex-wrap items-center justify-between gap-2 px-1">
+        <div className="flex items-center gap-2">
+          <span className="relative flex h-2 w-2">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75" />
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-400" />
+          </span>
+          <span className="text-[11px] font-bold uppercase tracking-wider text-amber-400">
+            Compact Stacked Deck • Scroll to Stack
+          </span>
+        </div>
+        <div className="flex items-center gap-1.5 text-xs font-semibold text-slate-400">
+          <Trophy size={13} className="text-amber-400" />
+          <span>{hackathons.length} Featured Hackathons</span>
+        </div>
+      </div>
+
+      {/* Stacked Cards Container */}
+      <div className="relative pb-4">
+        {hackathons.map((hack, index) => {
+          const stickyTopOffset = 75 + index * 24;
+
+          return (
+            <motion.div
+              key={hack.id || hack.name}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-30px" }}
+              transition={{ duration: 0.4, delay: index * 0.1 }}
+              style={{
+                top: `${stickyTopOffset}px`,
+                zIndex: index + 10,
+              }}
+              className={`sticky mb-6 sm:mb-8 last:mb-0 overflow-hidden rounded-2xl border p-4 sm:p-5 backdrop-blur-2xl transition-all duration-300 ${hack.isWinner
+                ? isDark
+                  ? "border-amber-400/50 bg-slate-950/95 hover:border-amber-400/80 shadow-[0_-8px_30px_rgba(0,0,0,0.8)] shadow-amber-500/10"
+                  : "border-amber-400 bg-white/95 hover:border-amber-500 shadow-[0_-6px_20px_rgba(0,0,0,0.12)]"
+                : isDark
+                  ? "border-white/15 bg-slate-950/95 hover:border-cyan-400/50 shadow-[0_-8px_30px_rgba(0,0,0,0.8)]"
+                  : "border-slate-300 bg-white/95 hover:border-cyan-500/50 shadow-[0_-6px_20px_rgba(0,0,0,0.12)]"
+                }`}
+            >
+              {/* Subtle Winner Glow Background Accent */}
+              {hack.isWinner && (
+                <div
+                  className={`pointer-events-none absolute -top-20 -right-20 h-40 w-40 rounded-full blur-3xl ${isDark ? "bg-amber-400/15" : "bg-amber-300/25"
                     }`}
+                />
+              )}
+
+              {/* Card Layer Tag & Status */}
+              <div className="mb-3 flex items-center justify-between border-b border-white/10 pb-2.5">
+                <div className="flex items-center gap-2">
+                  <span
+                    className={`rounded-md px-2 py-0.5 text-[10px] font-black tracking-wide ${hack.isWinner
+                      ? "bg-amber-400/20 text-amber-300 border border-amber-400/40"
+                      : "bg-cyan-400/15 text-cyan-300 border border-cyan-400/30"
+                      }`}
                   >
+                    CARD 0{index + 1}/0{hackathons.length}
+                  </span>
+                  <span className="text-xs font-bold text-slate-300 truncate max-w-[200px] sm:max-w-none">
                     {hack.name}
-                  </h3>
-                  <span className="rounded-full border border-purple-400/40 bg-purple-500/20 px-2.5 py-0.5 text-[10px] font-bold text-purple-300">
-                    {hack.level} Level
                   </span>
                 </div>
-                <p className="text-xs font-semibold text-cyan-400">
-                  Project: {hack.project} ({hack.result})
-                </p>
+
+                <div className="flex items-center gap-1.5">
+                  {hack.isWinner ? (
+                    <span className="rounded-full bg-gradient-to-r from-amber-400 to-yellow-500 px-2.5 py-0.5 text-[11px] font-black text-slate-950 shadow-sm">
+                      {hack.prize}
+                    </span>
+                  ) : (
+                    <span className="rounded-full border border-purple-400/40 bg-purple-500/20 px-2 py-0.5 text-[10px] font-bold text-purple-300">
+                      {hack.level}
+                    </span>
+                  )}
+                  <span
+                    className={`rounded-full border px-2 py-0.5 text-[10px] font-bold ${isDark
+                      ? "border-white/10 bg-slate-900 text-slate-300"
+                      : "border-slate-200 bg-slate-100 text-slate-700"
+                      }`}
+                  >
+                    {hack.edition}
+                  </span>
+                </div>
               </div>
-            </div>
 
-            <div className="flex flex-wrap items-center gap-3 text-xs font-medium text-slate-400">
-              <span className="flex items-center gap-1">
-                <CalendarDays size={13} className="text-cyan-400" />
-                {hack.date}
-              </span>
-              <span className="flex items-center gap-1">
-                <Clock size={13} className="text-cyan-400" />
-                {hack.duration}
-              </span>
-              <span className="flex items-center gap-1">
-                <Users size={13} className="text-cyan-400" />
-                {hack.team}
-              </span>
-            </div>
-          </div>
+              {/* 2-Column Responsive Layout for Compact Height */}
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
+                {/* Left Column (Core Info, Summary, & Actions) */}
+                <div className="lg:col-span-7 flex flex-col justify-between">
+                  <div>
+                    {/* Header with Trophy & Project Title */}
+                    <div className="flex items-start gap-3">
+                      <div
+                        className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border ${hack.isWinner
+                          ? "bg-amber-400/20 text-amber-300 border-amber-400/40 shadow-md shadow-amber-400/15"
+                          : "bg-purple-500/15 text-purple-400 border-purple-400/30"
+                          }`}
+                      >
+                        <Trophy size={20} className={hack.isWinner ? "animate-pulse" : ""} />
+                      </div>
+                      <div>
+                        <h3
+                          className={`text-base sm:text-lg font-black leading-tight ${isDark ? "text-white" : "text-slate-900"
+                            }`}
+                        >
+                          Project: {hack.project}
+                        </h3>
+                        {hack.problemStatement && (
+                          <p className="mt-0.5 text-[11px] font-medium text-slate-400 line-clamp-1">
+                            <span className="text-slate-500 font-semibold">PS: </span>
+                            {hack.problemStatement}
+                          </p>
+                        )}
+                      </div>
+                    </div>
 
-          <p
-            className={`mt-4 text-xs leading-relaxed ${
-              isDark ? "text-slate-300" : "text-slate-600"
-            }`}
-          >
-            {hack.summary}
-          </p>
+                    {/* Compact Meta Pills */}
+                    <div className="mt-2.5 flex flex-wrap items-center gap-1.5 text-[11px]">
+                      <span className="flex items-center gap-1 rounded-md bg-slate-900/60 border border-white/5 px-2 py-0.5 text-slate-300">
+                        <CalendarDays size={11} className="text-cyan-400" />
+                        {hack.date}
+                      </span>
+                      <span className="flex items-center gap-1 rounded-md bg-slate-900/60 border border-white/5 px-2 py-0.5 text-slate-300">
+                        <Clock size={11} className="text-cyan-400" />
+                        {hack.duration}
+                      </span>
+                      <span className="flex items-center gap-1 rounded-md bg-slate-900/60 border border-white/5 px-2 py-0.5 text-slate-300">
+                        <Users size={11} className="text-cyan-400" />
+                        {hack.team}
+                      </span>
+                      {hack.theme && (
+                        <span className="rounded-md bg-cyan-400/10 border border-cyan-400/25 px-2 py-0.5 font-medium text-cyan-300">
+                          {hack.theme}
+                        </span>
+                      )}
+                    </div>
 
-          <div className="mt-4 flex flex-wrap gap-1.5">
-            {hack.stack.map((item) => (
-              <span
-                key={item}
-                className={`rounded-md px-2.5 py-1 text-[11px] font-semibold ${
-                  isDark
-                    ? "bg-slate-900 text-cyan-300 border border-cyan-400/20"
-                    : "bg-cyan-50 text-cyan-700 border border-cyan-200"
-                }`}
-              >
-                {item}
-              </span>
-            ))}
-          </div>
+                    {/* Summary */}
+                    <p
+                      className={`mt-2.5 text-xs leading-relaxed ${isDark ? "text-slate-300" : "text-slate-600"
+                        }`}
+                    >
+                      {hack.summary}
+                    </p>
+                  </div>
 
-          {/* Action Row: Preview Certificate + Direct Download + GitHub Repo */}
-          <div className="mt-5 pt-4 border-t border-white/10 flex flex-wrap items-center justify-between gap-3">
-            <div className="flex items-center gap-2">
-              {hack.pdf && (
-                <>
-                  <button
-                    onClick={() =>
-                      onSelectHackathon &&
-                      onSelectHackathon({
-                        title: `${hack.name} Hackathon Certificate`,
-                        issuer: `National Cyber Security Hackathon • Project ${hack.project}`,
-                        level: `${hack.level.toUpperCase()} LEVEL`,
-                        pdf: hack.pdf,
-                      })
-                    }
-                    className="flex items-center gap-2 rounded-xl bg-purple-500/15 border border-purple-400/30 px-4 py-2 text-xs font-bold text-purple-300 transition hover:bg-purple-500 hover:text-slate-950 hover:shadow-lg cursor-pointer"
-                  >
-                    <Eye size={14} />
-                    <span>Preview Certificate</span>
-                  </button>
+                  {/* Actions Row */}
+                  <div className="mt-3.5 pt-3 border-t border-white/10 flex flex-wrap items-center justify-between gap-2">
+                    <div className="flex items-center gap-2">
+                      {hack.certificate && (
+                        <>
+                          <button
+                            onClick={() =>
+                              onSelectHackathon &&
+                              onSelectHackathon({
+                                title: `${hack.name} Certificate`,
+                                issuer: hack.issuer,
+                                level: hack.prize || `${hack.level.toUpperCase()}`,
+                                file: hack.certificate,
+                                image: hack.certificate,
+                                pdf: hack.certificate,
+                                isImage: hack.isImage,
+                                fileType: hack.fileType || (hack.isImage ? "jpeg" : "pdf"),
+                                isWinner: hack.isWinner,
+                              })
+                            }
+                            className={`flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-bold transition hover:shadow-md cursor-pointer ${hack.isWinner
+                              ? "bg-gradient-to-r from-amber-400 to-yellow-500 text-slate-950 hover:brightness-110 shadow-amber-500/20"
+                              : "bg-purple-500/15 border border-purple-400/30 text-purple-300 hover:bg-purple-500 hover:text-slate-950"
+                              }`}
+                          >
+                            <Eye size={13} />
+                            <span>Preview Certificate</span>
+                          </button>
 
-                  <a
-                    href={hack.pdf}
-                    download={`${hack.name.replace(/\s+/g, "_")}_Certificate.pdf`}
-                    className={`flex h-8 w-8 items-center justify-center rounded-xl border transition ${
-                      isDark
-                        ? "border-white/10 bg-slate-900 text-slate-300 hover:border-purple-400 hover:text-purple-300"
-                        : "border-slate-300 bg-slate-100 text-slate-700 hover:border-purple-500 hover:text-purple-700"
-                    }`}
-                    title="Direct Download Certificate PDF"
-                  >
-                    <Download size={14} />
-                  </a>
-                </>
-              )}
-            </div>
+                          <a
+                            href={hack.certificate}
+                            download={`${hack.name.replace(/\s+/g, "_")}_Certificate.${hack.fileType || (hack.isImage ? "jpeg" : "pdf")
+                              }`}
+                            className={`flex h-8 w-8 items-center justify-center rounded-lg border transition ${hack.isWinner
+                              ? "border-amber-400/40 bg-amber-400/10 text-amber-300 hover:bg-amber-400 hover:text-slate-950"
+                              : isDark
+                                ? "border-white/10 bg-slate-900 text-slate-300 hover:border-purple-400 hover:text-purple-300"
+                                : "border-slate-300 bg-slate-100 text-slate-700 hover:border-purple-500 hover:text-purple-700"
+                              }`}
+                            title="Direct Download Certificate"
+                          >
+                            <Download size={13} />
+                          </a>
+                        </>
+                      )}
+                    </div>
 
-            <a
-              href={hack.github}
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center gap-2 rounded-xl bg-cyan-400/10 border border-cyan-400/30 px-4 py-2 text-xs font-bold text-cyan-300 transition hover:bg-cyan-400 hover:text-slate-950"
-            >
-              <FaGithub size={14} />
-              <span>View Repository</span>
-            </a>
-          </div>
-        </motion.div>
-      ))}
+                    <a
+                      href={hack.github}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex items-center gap-1.5 rounded-lg bg-cyan-400/10 border border-cyan-400/30 px-3 py-1.5 text-xs font-bold text-cyan-300 transition hover:bg-cyan-400 hover:text-slate-950"
+                    >
+                      <FaGithub size={13} />
+                      <span>Repository</span>
+                    </a>
+                  </div>
+                </div>
+
+                {/* Right Column (Key Highlights & Tech Stack) */}
+                <div className="lg:col-span-5 flex flex-col justify-between space-y-3">
+                  {/* Key Highlights */}
+                  {hack.highlights && hack.highlights.length > 0 && (
+                    <div className="space-y-1.5 rounded-xl border border-white/10 bg-slate-900/60 p-3">
+                      <h4 className="text-[11px] font-bold uppercase tracking-wider text-cyan-400 flex items-center gap-1">
+                        <Sparkles size={12} className="text-cyan-400" />
+                        Technical Highlights
+                      </h4>
+                      <div className="space-y-1 text-[11px]">
+                        {hack.highlights.slice(0, 4).map((highlight, idx) => (
+                          <div
+                            key={idx}
+                            className={`flex items-start gap-1.5 ${isDark ? "text-slate-300" : "text-slate-700"
+                              }`}
+                          >
+                            <CheckCircle2
+                              size={12}
+                              className="mt-0.5 shrink-0 text-emerald-400"
+                            />
+                            <span className="line-clamp-2">{highlight}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Tech Stack Chips */}
+                  <div>
+                    <div className="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1.5">
+                      Tech Stack
+                    </div>
+                    <div className="flex flex-wrap gap-1">
+                      {hack.stack.map((item) => (
+                        <span
+                          key={item}
+                          className={`rounded px-2 py-0.5 text-[10px] font-semibold ${isDark
+                            ? "bg-slate-900/90 text-cyan-300 border border-cyan-400/20"
+                            : "bg-cyan-50 text-cyan-700 border border-cyan-200"
+                            }`}
+                        >
+                          {item}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          );
+        })}
+      </div>
     </div>
   );
 }
@@ -767,11 +1340,10 @@ function EducationCard({ edu, isDark }) {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       onClick={() => setIsHovered((prev) => !prev)}
-      className={`group relative overflow-hidden rounded-3xl border transition-all duration-500 cursor-pointer min-h-[300px] flex flex-col justify-end p-6 ${
-        isDark
-          ? "border-white/15 hover:border-cyan-400/60 shadow-2xl hover:shadow-cyan-500/20"
-          : "border-slate-300 hover:border-cyan-500/60 shadow-xl"
-      }`}
+      className={`group relative overflow-hidden rounded-3xl border transition-all duration-500 cursor-pointer min-h-[300px] flex flex-col justify-end p-6 ${isDark
+        ? "border-white/15 hover:border-cyan-400/60 shadow-2xl hover:shadow-cyan-500/20"
+        : "border-slate-300 hover:border-cyan-500/60 shadow-xl"
+        }`}
     >
       {/* Background Campus Photo with Smooth Zoom */}
       <div
@@ -781,11 +1353,10 @@ function EducationCard({ edu, isDark }) {
 
       {/* Dark Vignette & Frosted Glass Layer */}
       <div
-        className={`absolute inset-0 transition-all duration-500 ${
-          isHovered
-            ? "bg-slate-950/92 backdrop-blur-md"
-            : "bg-gradient-to-t from-slate-950/95 via-slate-950/65 to-slate-950/20"
-        }`}
+        className={`absolute inset-0 transition-all duration-500 ${isHovered
+          ? "bg-slate-950/92 backdrop-blur-md"
+          : "bg-gradient-to-t from-slate-950/95 via-slate-950/65 to-slate-950/20"
+          }`}
       />
 
       {/* Main Content Area */}
@@ -808,7 +1379,7 @@ function EducationCard({ edu, isDark }) {
           {edu.institute}
         </p>
 
-        {/* Expanded Coursework & Details on Hover (Image 2 format) */}
+        {/* Expanded Coursework & Details on Hover */}
         <AnimatePresence>
           {isHovered && (
             <motion.div
@@ -841,11 +1412,10 @@ function EducationCard({ edu, isDark }) {
       {/* Floating Circular Plus/Close Action Button */}
       <div className="absolute bottom-5 right-5 z-20 pointer-events-none">
         <div
-          className={`flex h-11 w-11 items-center justify-center rounded-full border shadow-2xl backdrop-blur-xl transition-all duration-300 ${
-            isHovered
-              ? "bg-amber-400 text-slate-950 border-amber-300 scale-110 shadow-amber-400/40"
-              : "bg-slate-950/80 text-white border-white/30 group-hover:border-cyan-400 group-hover:scale-110"
-          }`}
+          className={`flex h-11 w-11 items-center justify-center rounded-full border shadow-2xl backdrop-blur-xl transition-all duration-300 ${isHovered
+            ? "bg-amber-400 text-slate-950 border-amber-300 scale-110 shadow-amber-400/40"
+            : "bg-slate-950/80 text-white border-white/30 group-hover:border-cyan-400 group-hover:scale-110"
+            }`}
         >
           <motion.div
             animate={{ rotate: isHovered ? 45 : 0 }}
@@ -865,33 +1435,7 @@ function EducationJourneyView({ isDark }) {
 
   return (
     <div className="space-y-6">
-      {/* Sub-Switch: Degrees vs Milestone Roadmap */}
-      <div className="flex justify-center gap-2">
-        <button
-          onClick={() => setSubView("education")}
-          className={`rounded-xl px-4 py-1.5 text-xs font-bold transition ${
-            subView === "education"
-              ? "bg-cyan-400 text-slate-950 shadow-md shadow-cyan-400/30"
-              : isDark
-              ? "border border-white/10 bg-slate-900 text-slate-400 hover:text-white"
-              : "border border-slate-300 bg-white text-slate-600"
-          }`}
-        >
-          Degrees & Academics
-        </button>
-        <button
-          onClick={() => setSubView("journey")}
-          className={`rounded-xl px-4 py-1.5 text-xs font-bold transition ${
-            subView === "journey"
-              ? "bg-cyan-400 text-slate-950 shadow-md shadow-cyan-400/30"
-              : isDark
-              ? "border border-white/10 bg-slate-900 text-slate-400 hover:text-white"
-              : "border border-slate-300 bg-white text-slate-600"
-          }`}
-        >
-          Timeline & Career Milestones
-        </button>
-      </div>
+      
 
       {subView === "education" ? (
         /* Academic Degrees: Photography & Expanding Details Cards */
@@ -909,11 +1453,10 @@ function EducationJourneyView({ isDark }) {
               <motion.div
                 key={m.year}
                 whileHover={{ y: -4 }}
-                className={`rounded-2xl border p-5 backdrop-blur-xl transition duration-300 flex flex-col justify-between ${
-                  isDark
-                    ? "border-white/10 bg-slate-950/70 hover:border-cyan-400/40"
-                    : "border-slate-200 bg-white hover:border-cyan-500/40"
-                }`}
+                className={`rounded-2xl border p-5 backdrop-blur-xl transition duration-300 flex flex-col justify-between ${isDark
+                  ? "border-white/10 bg-slate-950/70 hover:border-cyan-400/40"
+                  : "border-slate-200 bg-white hover:border-cyan-500/40"
+                  }`}
               >
                 <div>
                   <div className="flex items-center justify-between mb-2">
@@ -925,16 +1468,14 @@ function EducationJourneyView({ isDark }) {
                     </div>
                   </div>
                   <h4
-                    className={`text-sm font-bold ${
-                      isDark ? "text-white" : "text-slate-900"
-                    }`}
+                    className={`text-sm font-bold ${isDark ? "text-white" : "text-slate-900"
+                      }`}
                   >
                     {m.title}
                   </h4>
                   <p
-                    className={`mt-2 text-xs leading-relaxed ${
-                      isDark ? "text-slate-300" : "text-slate-600"
-                    }`}
+                    className={`mt-2 text-xs leading-relaxed ${isDark ? "text-slate-300" : "text-slate-600"
+                      }`}
                   >
                     {m.desc}
                   </p>
@@ -944,11 +1485,10 @@ function EducationJourneyView({ isDark }) {
                   {m.tags.map((t) => (
                     <span
                       key={t}
-                      className={`rounded px-1.5 py-0.5 text-[10px] font-semibold ${
-                        isDark
-                          ? "bg-slate-900 text-cyan-300 border border-cyan-400/20"
-                          : "bg-cyan-50 text-cyan-700"
-                      }`}
+                      className={`rounded px-1.5 py-0.5 text-[10px] font-semibold ${isDark
+                        ? "bg-slate-900 text-cyan-300 border border-cyan-400/20"
+                        : "bg-cyan-50 text-cyan-700"
+                        }`}
                     >
                       {t}
                     </span>
@@ -1032,22 +1572,20 @@ function PortfolioShowcase({ theme = "dark" }) {
               </span>
             </h2>
             <p
-              className={`mt-2 text-xs sm:text-sm font-medium ${
-                isDark ? "text-slate-400" : "text-slate-600"
-              }`}
+              className={`mt-2 text-xs sm:text-sm font-medium ${isDark ? "text-slate-400" : "text-slate-600"
+                }`}
             >
-              Explore my interactive software projects, core tech stack, credentials, and journey.
+              Explore my interactive software projects, core tech stack, credentials, and Education journey.
             </p>
           </div>
 
           {/* Unified Tab Selector Bar */}
           <div className="flex justify-center mb-8">
             <div
-              className={`flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 rounded-2xl md:rounded-3xl border p-2 backdrop-blur-xl shadow-2xl transition duration-300 max-w-full overflow-x-auto ${
-                isDark
-                  ? "border-white/10 bg-slate-900/70 shadow-cyan-500/5"
-                  : "border-slate-300 bg-white/90 shadow-slate-300/40"
-              }`}
+              className={`flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 rounded-2xl md:rounded-3xl border p-2 backdrop-blur-xl shadow-2xl transition duration-300 max-w-full overflow-x-auto ${isDark
+                ? "border-white/10 bg-slate-900/70 shadow-cyan-500/5"
+                : "border-slate-300 bg-white/90 shadow-slate-300/40"
+                }`}
             >
               {tabs.map((tab) => {
                 const Icon = tab.icon;
@@ -1057,15 +1595,14 @@ function PortfolioShowcase({ theme = "dark" }) {
                   <button
                     key={tab.id}
                     onClick={() => handleTabChange(tab.id)}
-                    className={`relative flex items-center gap-2 rounded-xl md:rounded-2xl px-4 py-2.5 text-xs sm:text-sm font-bold transition-all duration-300 select-none ${
-                      isActive
-                        ? isDark
-                          ? "bg-cyan-400/20 text-cyan-300 border border-cyan-400/50 shadow-[0_0_16px_rgba(34,211,238,0.3)]"
-                          : "bg-cyan-500 text-white shadow-md shadow-cyan-500/30"
-                        : isDark
+                    className={`relative flex items-center gap-2 rounded-xl md:rounded-2xl px-4 py-2.5 text-xs sm:text-sm font-bold transition-all duration-300 select-none ${isActive
+                      ? isDark
+                        ? "bg-cyan-400/20 text-cyan-300 border border-cyan-400/50 shadow-[0_0_16px_rgba(34,211,238,0.3)]"
+                        : "bg-cyan-500 text-white shadow-md shadow-cyan-500/30"
+                      : isDark
                         ? "text-slate-400 hover:text-slate-100 hover:bg-white/5 border border-transparent"
                         : "text-slate-600 hover:text-slate-900 hover:bg-slate-100 border border-transparent"
-                    }`}
+                      }`}
                   >
                     <Icon size={16} className={isActive ? "animate-pulse" : ""} />
                     <span>{tab.label}</span>
@@ -1077,11 +1614,10 @@ function PortfolioShowcase({ theme = "dark" }) {
 
           {/* Tab Content Container */}
           <div
-            className={`rounded-3xl border p-6 md:p-8 shadow-2xl backdrop-blur-xl transition duration-300 ${
-              isDark
-                ? "border-white/10 bg-slate-900/50 hover:border-cyan-400/40"
-                : "border-slate-200 bg-white/80 hover:border-cyan-500/40 shadow-slate-300/40"
-            }`}
+            className={`rounded-3xl border p-6 md:p-8 shadow-2xl backdrop-blur-xl transition duration-300 ${isDark
+              ? "border-white/10 bg-slate-900/50 hover:border-cyan-400/40"
+              : "border-slate-200 bg-white/80 hover:border-cyan-500/40 shadow-slate-300/40"
+              }`}
           >
             <AnimatePresence mode="wait">
               <motion.div
@@ -1134,11 +1670,10 @@ function PortfolioShowcase({ theme = "dark" }) {
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
               onClick={(e) => e.stopPropagation()}
-              className={`relative max-h-[90vh] w-full max-w-3xl overflow-y-auto rounded-3xl border p-6 shadow-2xl backdrop-blur-2xl ${
-                isDark
-                  ? "border-cyan-400/30 bg-slate-950 text-white"
-                  : "border-slate-300 bg-white text-slate-900"
-              }`}
+              className={`relative max-h-[90vh] w-full max-w-3xl overflow-y-auto rounded-3xl border p-6 shadow-2xl backdrop-blur-2xl ${isDark
+                ? "border-cyan-400/30 bg-slate-950 text-white"
+                : "border-slate-300 bg-white text-slate-900"
+                }`}
             >
               {/* Close Button */}
               <button
@@ -1173,9 +1708,8 @@ function PortfolioShowcase({ theme = "dark" }) {
               </div>
 
               <p
-                className={`mt-4 text-sm leading-relaxed ${
-                  isDark ? "text-slate-300" : "text-slate-600"
-                }`}
+                className={`mt-4 text-sm leading-relaxed ${isDark ? "text-slate-300" : "text-slate-600"
+                  }`}
               >
                 {modalProject.description}
               </p>
@@ -1209,94 +1743,7 @@ function PortfolioShowcase({ theme = "dark" }) {
         )}
       </AnimatePresence>
 
-      {/* In-App Certificate & Resume PDF Document Preview Modal */}
-      <AnimatePresence>
-        {modalDoc && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 p-3 sm:p-6 backdrop-blur-md"
-            onClick={() => setModalDoc(null)}
-          >
-            <motion.div
-              initial={{ scale: 0.94, opacity: 0, y: 20 }}
-              animate={{ scale: 1, opacity: 1, y: 0 }}
-              exit={{ scale: 0.94, opacity: 0, y: 20 }}
-              transition={{ type: "spring", stiffness: 350, damping: 25 }}
-              onClick={(e) => e.stopPropagation()}
-              className={`relative flex flex-col h-[90vh] w-full max-w-4xl overflow-hidden rounded-3xl border shadow-2xl backdrop-blur-2xl ${
-                isDark
-                  ? "border-cyan-400/40 bg-slate-950 text-white shadow-cyan-500/20"
-                  : "border-slate-300 bg-white text-slate-900 shadow-2xl"
-              }`}
-            >
-              {/* Modal Top Bar */}
-              <div className="flex items-center justify-between border-b border-white/10 px-5 py-4 shrink-0 bg-slate-900/70">
-                <div className="flex items-center gap-3">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-cyan-400/10 text-cyan-400 border border-cyan-400/30">
-                    <FileText size={20} />
-                  </div>
-                  <div>
-                    <div className="flex items-center gap-2">
-                      <h3 className="text-base sm:text-lg font-black">{modalDoc.title}</h3>
-                      {modalDoc.level && (
-                        <span className="rounded-full bg-cyan-400/20 border border-cyan-400/40 px-2 py-0.5 text-[10px] font-black text-cyan-300">
-                          {modalDoc.level}
-                        </span>
-                      )}
-                    </div>
-                    <p className="text-xs font-semibold text-cyan-400">
-                      {modalDoc.issuer || modalDoc.achievement}
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-2">
-                  {/* Download Button */}
-                  <a
-                    href={modalDoc.pdf}
-                    download={`${modalDoc.title.replace(/\s+/g, "_")}.pdf`}
-                    className="flex items-center gap-1.5 rounded-xl border border-cyan-400/40 bg-cyan-400/15 px-3 py-2 text-xs font-bold text-cyan-300 transition hover:bg-cyan-400 hover:text-slate-950 cursor-pointer"
-                    title="Download PDF"
-                  >
-                    <Download size={14} />
-                    <span className="hidden sm:inline">Download</span>
-                  </a>
-
-                  {/* Open in New Window Button */}
-                  <a
-                    href={modalDoc.pdf}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="flex h-9 w-9 items-center justify-center rounded-xl border border-white/15 bg-slate-900/80 text-slate-300 transition hover:border-cyan-400 hover:text-cyan-300"
-                    title="Open in Full Tab"
-                  >
-                    <ExternalLink size={15} />
-                  </a>
-
-                  {/* Close Button */}
-                  <button
-                    onClick={() => setModalDoc(null)}
-                    className="flex h-9 w-9 items-center justify-center rounded-xl border border-white/15 bg-slate-900/80 text-slate-300 transition hover:bg-rose-500/20 hover:text-rose-300 hover:border-rose-400 cursor-pointer"
-                  >
-                    <X size={18} />
-                  </button>
-                </div>
-              </div>
-
-              {/* Modal PDF Frame View */}
-              <div className="relative flex-1 w-full bg-slate-900/90 overflow-hidden">
-                <iframe
-                  src={`${modalDoc.pdf}#toolbar=0&navpanes=0`}
-                  className="w-full h-full border-0"
-                  title={modalDoc.title}
-                />
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      <DocModal doc={modalDoc} onClose={() => setModalDoc(null)} isDark={isDark} />
     </section>
   );
 }
