@@ -211,14 +211,12 @@ const skillCategories = [
   },
   {
     id: "web-dev",
-    title: "Full-Stack Development",
-    tagline: "High-Performance Modern Web Systems & APIs",
+    title: "Frontend Development",
+    tagline: "High-Performance Modern Web Frontend",
     icon: <Server size={22} />,
     badgeColor: "bg-purple-400/20 text-purple-300 border-purple-400/40",
     skills: [
       "React.js",
-      "FastAPI (Async Python)",
-      "Flask",
       "Tailwind CSS",
       "Vite & Node.js",
       "WebSockets (Real-time)",
