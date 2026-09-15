@@ -58,6 +58,8 @@ import javaProgPDF from "../assets/certificates/Java_programming.pdf";
 import resumePDF from "../assets/certificates/Rehan_Resume.pdf";
 import citadelPDF from "../assets/certificates/Citadel.pdf";
 import sihCertificateImg from "../assets/certificates/SIH.jpeg";
+import technologyPDF from "../assets/certificates/Technology.pdf";
+import genaiPDF from "../assets/certificates/GenAI certificate.pdf";
 
 /* ==========================================================================
    DATA DEFINITIONS
@@ -272,6 +274,26 @@ const certifications = [
     achievement: "Elite Gold Credential",
     pdf: javaProgPDF,
     skills: ["OOP Concepts", "Multithreading", "Exception Handling", "Collections Framework"],
+  },
+  {
+    id: "technology-deloitte",
+    title: "Technology Job Simulation",
+    issuer: "Deloitte",
+    duration: "06 Sep 2026",
+    level: "DELOITTE",
+    achievement: "Technology Virtual Experience Program",
+    pdf: technologyPDF,
+    skills: ["Data Structure", "Data Modeling", "Data Analysis", "Python (Programming Language)"],
+  },
+  {
+    id: "genai-google",
+    title: "Generative AI",
+    issuer: "Google Cloud",
+    duration: "15 Sep 2026",
+    level: "GOOGLE_CLOUD",
+    achievement: "Powered by Google Cloud",
+    pdf: genaiPDF,
+    skills: ["Generative AI Models and Architecture", "GenAI Applications", "AI limitations and Challenges", "Responsible AI", "Future Trends in Generative AI"],
   },
 ];
 
@@ -892,12 +914,18 @@ function CertificateCard({ cert, isDark, onSelectCert, index }) {
 
   const isGold = cert.level === "GOLD";
   const isSilver = cert.level === "SILVER";
+  const isDeloitte = cert.level === "DELOITTE";
+  const isGoogleCloud = cert.level === "GOOGLE_CLOUD";
 
   const accentGlow = isGold
     ? "from-amber-500/20 via-yellow-400/10 to-amber-500/5 border-amber-400/40 shadow-amber-500/10"
     : isSilver
       ? "from-slate-200/20 via-sky-300/10 to-slate-400/5 border-slate-300/40 shadow-sky-500/10"
-      : "from-cyan-500/20 via-sky-400/10 to-cyan-500/5 border-cyan-400/40 shadow-cyan-500/10";
+      : isDeloitte
+        ? "from-green-500/20 via-lime-400/10 to-green-500/5 border-green-500/40 shadow-green-500/10"
+        : isGoogleCloud
+          ? "from-blue-500/20 via-red-400/10 to-yellow-500/5 border-blue-500/40 shadow-blue-500/10"
+          : "from-cyan-500/20 via-sky-400/10 to-cyan-500/5 border-cyan-400/40 shadow-cyan-500/10";
 
   const badgeStyle = isGold
     ? isDark
@@ -907,9 +935,17 @@ function CertificateCard({ cert, isDark, onSelectCert, index }) {
       ? isDark
         ? "bg-gradient-to-r from-slate-200/20 to-sky-300/20 text-slate-100 border-slate-300/50 shadow-sm shadow-slate-300/20"
         : "bg-sky-100 text-sky-900 border-sky-400 font-black shadow-sm"
-      : isDark
-        ? "bg-gradient-to-r from-cyan-400/20 to-teal-400/20 text-cyan-300 border-cyan-400/50 shadow-sm shadow-cyan-400/20"
-        : "bg-cyan-100 text-cyan-900 border-cyan-400 font-black shadow-sm";
+      : isDeloitte
+        ? isDark
+          ? "bg-gradient-to-r from-green-500/10 to-lime-500/10 text-green-400 border-green-500/50 shadow-sm shadow-green-500/20"
+          : "bg-black text-green-400 border-green-500 font-black shadow-sm"
+        : isGoogleCloud
+          ? isDark
+            ? "bg-gradient-to-r from-blue-500/20 to-blue-400/10 text-blue-300 border-blue-400/50 shadow-sm shadow-blue-400/20"
+            : "bg-blue-50 text-blue-700 border-blue-500 font-black shadow-sm"
+          : isDark
+            ? "bg-gradient-to-r from-cyan-400/20 to-teal-400/20 text-cyan-300 border-cyan-400/50 shadow-sm shadow-cyan-400/20"
+            : "bg-cyan-100 text-cyan-900 border-cyan-400 font-black shadow-sm";
 
   return (
     <motion.div
@@ -948,6 +984,10 @@ function CertificateCard({ cert, isDark, onSelectCert, index }) {
               ? isDark ? "text-amber-400" : "text-amber-500"
               : isSilver
               ? isDark ? "text-slate-300" : "text-sky-600"
+              : isDeloitte
+              ? isDark ? "text-green-500" : "text-green-600"
+              : isGoogleCloud
+              ? isDark ? "text-blue-500" : "text-blue-600"
               : isDark ? "text-cyan-400" : "text-cyan-600"
           }
         />
@@ -959,8 +999,8 @@ function CertificateCard({ cert, isDark, onSelectCert, index }) {
           isDark ? "border-white/10" : "border-slate-200"
         }`}>
           <span className={`flex items-center gap-1.5 rounded-full border px-3 py-1 text-[11px] font-black uppercase tracking-wider ${badgeStyle}`}>
-            <Sparkles size={12} className={isGold ? "text-amber-400 animate-pulse" : isSilver ? "text-sky-500" : "text-cyan-500"} />
-            <span>{isGold ? "🥇 ELITE GOLD" : isSilver ? "🥈 ELITE + SILVER" : "🎖️ ELITE CERTIFIED"}</span>
+            <Sparkles size={12} className={isGold ? "text-amber-400 animate-pulse" : isSilver ? "text-sky-500" : isDeloitte ? "text-green-500" : isGoogleCloud ? "text-blue-500" : "text-cyan-500"} />
+            <span>{isGold ? "🥇 ELITE GOLD" : isSilver ? "🥈 ELITE + SILVER" : isDeloitte ? "🟢 DELOITTE" : isGoogleCloud ? "☁️ GOOGLE CLOUD" : "🎖️ ELITE CERTIFIED"}</span>
           </span>
           <span className={`text-[11px] font-bold tracking-wide ${isDark ? "text-slate-400" : "text-slate-600"}`}>
             {cert.duration}
@@ -988,6 +1028,10 @@ function CertificateCard({ cert, isDark, onSelectCert, index }) {
             ? isDark ? "bg-amber-400/10 border-amber-400/30 text-amber-300" : "bg-amber-50 border-amber-300 text-amber-900 font-bold"
             : isSilver
             ? isDark ? "bg-sky-400/10 border-sky-400/30 text-sky-200" : "bg-sky-50 border-sky-300 text-sky-900 font-bold"
+            : isDeloitte
+            ? isDark ? "bg-green-500/10 border-green-500/30 text-green-300" : "bg-green-50 border-green-300 text-green-900 font-bold"
+            : isGoogleCloud
+            ? isDark ? "bg-blue-500/10 border-blue-500/30 text-blue-300" : "bg-blue-50 border-blue-300 text-blue-900 font-bold"
             : isDark ? "bg-cyan-400/10 border-cyan-400/30 text-cyan-300" : "bg-cyan-50 border-cyan-300 text-cyan-900 font-bold"
         }`}>
           <ShieldCheck size={16} className="shrink-0" />
