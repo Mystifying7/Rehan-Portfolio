@@ -14,12 +14,12 @@ const stats = [
   },
   {
     icon: <Award size={20} />,
-    value: "3",
-    label: "NPTEL Credentials",
+    value: "6",
+    label: "Certifications Achieved",
   },
   {
     icon: <GraduationCap size={20} />,
-    value: "2024",
+    value: "2024 - 2028",
     label: "B.Tech CSE Journey",
   },
 ];

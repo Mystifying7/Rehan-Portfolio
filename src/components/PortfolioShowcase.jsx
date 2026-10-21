@@ -55,11 +55,12 @@ import class10Img from "../assets/images/class-10.jpg";
 import cProgPDF from "../assets/certificates/C_programming.pdf";
 import dsaPDF from "../assets/certificates/Data_Structure_Algorithm.pdf";
 import javaProgPDF from "../assets/certificates/Java_programming.pdf";
-import resumePDF from "../assets/certificates/Rehan_Resume.pdf";
+import  resumePDF from "../assets/certificates/Rehan_Resume.pdf";  
 import citadelPDF from "../assets/certificates/Citadel.pdf";
 import sihCertificateImg from "../assets/certificates/SIH.jpeg";
 import technologyPDF from "../assets/certificates/Technology.pdf";
 import genaiPDF from "../assets/certificates/GenAI certificate.pdf";
+import MachineLearning from "../assets/certificates/Machine_Learning.pdf";
 
 /* ==========================================================================
    DATA DEFINITIONS
@@ -294,6 +295,15 @@ const certifications = [
     achievement: "Powered by Google Cloud",
     pdf: genaiPDF,
     skills: ["Generative AI Models and Architecture", "GenAI Applications", "AI limitations and Challenges", "Responsible AI", "Future Trends in Generative AI"],
+  },{
+    id: "Ml With Python",
+    title: "ML with Python",
+    issuer: "Simlilearn | SkillUP",
+    duration: "19 oct 2026",
+    level: "Simplilearn",
+    achievement: "Mastered foundational machine learning with Python",
+    pdf: MachineLearning,
+    skills: ["Machine Learning", "Supervised Learning", "Unsupervised Learning", "Ensemble Learning", "MLOps", "Regression Analysis", "Classification Algorithms", "Clustering", "Recommender Systems", "Python", "TensorFlow", "Keras", "PyTorch"],
   },
 ];
 
