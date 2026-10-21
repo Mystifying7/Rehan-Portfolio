@@ -26,7 +26,7 @@ function Contact({ theme = "dark" }) {
   const [formSent, setFormSent] = useState(false);
 
   const isDark = theme === "dark";
-  const email = "rehanalam700000@gmail.com";
+  const email = "rehanalam201006@gmail.com";
 
   const triggerToast = (msg) => {
     setToastMessage(msg);
